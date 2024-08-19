@@ -15,3 +15,15 @@ Wafflehut is a Reddit-style website that is all about people sharing their opini
 | Issue ID    | User Story |
 |-------------|-------------|
 |[#1](https://github.com/AlistairDriscoll/wafflehut/issues/1)| As an unregistered user I can look at some posts done by registered users so that I can see what the website is about|
+|[#2](https://github.com/AlistairDriscoll/wafflehut/issues/2)| As a first time user I can navigate through the website easily so that I have a good user experience and find the right content and pages with ease|
+|[#3](https://github.com/AlistairDriscoll/wafflehut/issues/3)| As a first time/unregistered user I can sign up to the website easily so that I can comment and react to posts as well as put posts of my own|
+
+### Frequent/Registered Visitor Goals
+
+| Issue ID    | User Story |
+|-------------|-------------|
+|[#4](https://github.com/AlistairDriscoll/wafflehut/issues/4)| As a regular/registered user I can create, update and delete posts so that I can share my opinions on the website for others to see|
+|[#5](https://github.com/AlistairDriscoll/wafflehut/issues/5)| As a regular/registered user I can comment on mine and others posts so that I can let them know my opinion on their posts and discuss more with people who have commented on mine|
+|[#6](https://github.com/AlistairDriscoll/wafflehut/issues/6)| As a regular/registered user I can press one of the reactions so that the person who posted knows what people think about it|
+|[#7](https://github.com/AlistairDriscoll/wafflehut/issues/7)| As a regular/registered user I can delete my account so that no one can see my posts, comments or reactions anymore if I want to come off the site|
+
