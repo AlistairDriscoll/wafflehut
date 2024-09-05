@@ -28,3 +28,6 @@ Wafflehut is a Reddit-style website that is all about people sharing their opini
 |[#6](https://github.com/AlistairDriscoll/wafflehut/issues/6)| As a regular/registered user I can press one of the reactions so that the person who posted knows what people think about it|
 |[#7](https://github.com/AlistairDriscoll/wafflehut/issues/7)| As a regular/registered user I can delete my account so that no one can see my posts, comments or reactions anymore if I want to come off the site|
 
+## Deployment
+
+To find out about deployment, refer to the [DEPLOYMENT.md](DEPLOYMENT.md) file.
