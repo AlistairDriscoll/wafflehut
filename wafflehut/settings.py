@@ -30,7 +30,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = False
 
 ALLOWED_HOSTS = ['8000-alistairdrisc-wafflehut-jh11xkdolln.ws.codeinstitute-ide.net',
-                'https://wafflehut-b72a2da43389.herokuapp.com/']
+                '.herokuapp.com/']
 
 
 # Application definition
