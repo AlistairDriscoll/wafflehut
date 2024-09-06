@@ -19,7 +19,7 @@ VS Code is a good example of a code editor in which you could deploy this, if th
 
 To deploy locally, you will need to install all the technologies listed on the requirements.txt file, this means you need to open a terminal if you haven't got one open yet and type in the command 'pip3 install -r requirements.txt'
 
-Once the dependencies are installed, you will need to make a file in the main folder (the one that contains the manage.py file) called env.py and add the following:
+Once the dependencies are installed, you will need to make a file in the main directory (the main folder that contains the manage.py file) called env.py and add the following:
 
     
     import os
@@ -57,7 +57,7 @@ In order to deploy to heroku the user will at first need to create/update a requ
 
     pip3 freeze > requirements.txt
 
-Then make a file called 'Procfile' in the main folder (again, the same folder that contains the manage.py and requirements.txt files) and put this line of code in it:
+Then make a file called 'Procfile' in the main directory (again, the same main folder that contains the manage.py and requirements.txt files) and put this line of code in it:
 
     web: gunicorn wafflehut.wsgi
 
@@ -79,13 +79,9 @@ Then you need to add three. Firstly type in DISABLE_COLLECTSTATIC on the right c
 
 ![Config vars](documentation/deployment/config-vars.png)
 
-Now click on the deploy tab and press the button to connect with github:
+Now click on the deploy tab and press the button to connect with github, connect to your github account and find the repository that contains the project, then click connect.
 
-![Connect to github](documentation/deployment/github-connect.png)
-
-Connect to your github account and find the repository that contains the project, then click connect.
-
-![Connect with the github repository](documentation/deployment/repo-connect.png)
+![Connect with the github repository](documentation/deployment/connect-to-ghub.png)
 
 Lastly, scroll to the bottom and select the deploy branch button.
 
