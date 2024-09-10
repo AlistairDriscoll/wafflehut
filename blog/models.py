@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
-REACTIONS = ((0, "No reaction"), (1, "This is absolute complete waffle"), (2, "This is pretty much waffle"), (3, "I neither agree nor disagree with this waffle"), (4, "I fully agree with this waffle"))
+REACTIONS = ((0, "This is absolute complete waffle"), (1, "This is pretty much waffle"), (2, "I neither agree nor disagree with this waffle"), (3, "I fully agree with this waffle"))
 
 # Create your models here.
 
@@ -15,7 +15,7 @@ class Reaction(models.Model):
         User, on_delete=models.CASCADE, related_name="reaction_clicker"
     )
 
-    reaction_option = models.IntegerField(choices=REACTIONS, default=0)
+    reaction_option = models.IntegerField(choices=REACTIONS, null=True)
 
 
 class Post(models.Model):
@@ -34,7 +34,7 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     excerpt = models.TextField(blank=True)
     reactions = models.ForeignKey(
-        Reaction, on_delete=models.CASCADE, related_name="reaction"
+        Reaction, on_delete=models.CASCADE, related_name="reaction", null=True
     )
 
     class Meta:
