@@ -7,7 +7,7 @@ class PostAdmin(SummernoteModelAdmin):
 
     list_display = ('title', 'slug', 'created_on')
     search_fields = ['title']
-    prepopulated_fields = {'slug': ('title',)}
+    prepopulated_fields = {'slug': ('title',), 'excerpt': ('content',)}
 
 # Register your models here.
 

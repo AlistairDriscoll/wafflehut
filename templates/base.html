@@ -1,15 +1,26 @@
 {% load static %}
 
-{% url %}
+{% url 'index' as home_url %}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/bootstrap-styles.css' %}" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/wafflehut-logo.svg' %}"/>
     <title>Wafflehut</title>
 </head>
 <body>
-    
+<header>
+    <i class="fa-solid fa-stroopwafel"></i>
+</header>
+    {% block content %}
+    <!-- Content Goes here -->
+
+    {% endblock content %}
+    <script src="https://kit.fontawesome.com/bc5efad812.js" crossorigin="anonymous"></script>
 </body>
 </html>
