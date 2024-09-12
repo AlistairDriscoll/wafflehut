@@ -4,6 +4,8 @@ The app was deployed to [Heroku](https://heroku.com)
 
 The database was deployed to Code Institute Postgres Database server, provided to me by The Code Institute who I am studying with currently. This project will be my Project 4 submission in their 'Diploma in Full Stack Development' course. One can look online for other database storage resources if not on this course.
 
+For dynamic picture storage I used Cloudinary which stores these pictures online in a cloud. There might be similar websites that one could use instead although this one has a free service so seems like this is as good as any and meets all requirements necessary. Go onto their [website](https://cloudinary.com/) to make a cloudinary account, then select the "Go to API keys" button, there you will see a button to copy your API key to the clipboard (which you will need to do later.)
+
 The app can be accessed via this [link](https://wafflehut-b72a2da43389.herokuapp.com/)
 
 ## Local deployment
@@ -32,9 +34,13 @@ Once the dependencies are installed, you will need to make a file in the main di
         "SECRET_KEY", "<your_secret_key>"
     )
 
+    os.environ.setdefault(
+        "CLOUDINARY_URL", "<your_api_key>"
+    )
+
 These variables are then put into the operating system, and now the env.py file must be added to the .gitignore file, along with the pycache (by typing '__pycache__/'). All these actions are in place to help protect the user from malicious behaivior. Another thing to note is to keep the debug set to 'False' when the project is not in development, otherwise the user risks sharing private information that could also make them vulnerable to malicious attacks.
 
-Lastly, the database you are using will not have an idea of the models you are using, so you need to make your migrations, then migrate them by typing these commands into the terminal:
+Lastly, the database you are using will not have an idea of the models you are using, so you need to make your migrations and then migrate them by typing these commands into the terminal:
 
     python3 manage.py makemigrations
     python3 manage.py migrate
@@ -75,7 +81,7 @@ Now click on the settings tab and click 'Reveal config vars':
 
 ![Reveal config vars](documentation/deployment/reveal-config.png)
 
-Then you need to add three. Firstly type in DISABLE_COLLECTSTATIC on the right column and set the value to 1 on the left. Then put the values of your env.py file in also with 'DATABASE_URL' and 'SECRET_KEY' to the left and their values to the right.
+Then you need to add three. Firstly type in DISABLE_COLLECTSTATIC on the right column and set the value to 1 on the left. Then put the values of your env.py file in also with 'DATABASE_URL' and 'SECRET_KEY' to the left and their values to the right. Lastly do the same with your cloudinary key-value pair.
 
 ![Config vars](documentation/deployment/config-vars.png)
 
