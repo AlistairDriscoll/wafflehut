@@ -1,5 +1,24 @@
-/* Extra personalised styling that writes over the bootstrap styles */
+/***
 
-body {
-    background-color: pink;
+Extra personalised styling that writes over the bootstrap styles
+
+***/
+
+
+/* Navbar styles */
+
+.east-sea-dokdo-regular {
+    font-family: "East Sea Dokdo", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 35px;
+}
+
+
+.max-logo-height {
+    max-height: 100px;
+}
+
+.red-hover:hover {
+    color: #fa1907;
 }

@@ -4,23 +4,45 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static 'css/bootstrap-styles.css' %}" rel="stylesheet"/>
-    <!-- Custom CSS -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
-    <link rel="icon" type="image/x-icon" href="{% static 'assets/wafflehut-logo.svg' %}"/>
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/images/waffle.png' %}" />
     <title>Wafflehut</title>
+    <!-- Bootstrap link -->
+    <link href="{% static 'css/bootstrap-styles.css' %}" rel="stylesheet" />
+    <!-- Font links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
 </head>
+
 <body>
-<header>
-    <i class="fa-solid fa-stroopwafel header-big-size"></i>
-</header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand east-sea-dokdo-regular ms-4" href="{% url 'index' %}">
+            <h1>
+                Wafflehut
+                <img class="max-logo-height d-none d-sm-inline" src="{% static 'assets/images/waffle-logo.png' %}" alt="Wafflehut logo">
+            </h1>
+        </a>
+        <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto me-2">
+                <li class="nav-item"><a class="nav-link red-hover" href="{% url 'index' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link red-hover" href="#!">Log In</a></li>
+                <li class="nav-item"><a class="nav-link red-hover" href="#!">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
     {% block content %}
     <!-- Content Goes here -->
 
     {% endblock content %}
     <script src="https://kit.fontawesome.com/bc5efad812.js" crossorigin="anonymous"></script>
+    <script src="{% static 'js/script.js' %}" crossorigin="anonymous"></script>
 </body>
+
 </html>
