@@ -1,6 +1,7 @@
 from . import views
 from django.urls import path
+from django.contrib.auth.models import User
 
 urlpatterns = [
-    path('', views.index.as_view(), name='index'),
+    path('', views.Index.as_view(), name='index'),
 ]

@@ -39,7 +39,7 @@
             <ul class="navbar-nav ms-auto me-2">
                 <li class="nav-item"><a class="nav-link red-hover" href="{% url 'index' %}">Home</a></li>
                 {% if user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link red-hover" href="#">Your User Page</a></li>
+                <li class="nav-item"><a class="nav-link red-hover" href="{% url 'profile' %}">Your User Page</a></li>
                 <li class="nav-item"><a class="nav-link red-hover" href="{% url 'account_logout' %}">Logout</a></li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link red-hover" href="{% url 'account_login' %}">Log In</a></li>
