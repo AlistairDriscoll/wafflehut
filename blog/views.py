@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from django.views import generic
+
 from .models import Post
 from django.contrib.auth.models import User
 import random
+
+from django.http import HttpRequest
 
 # Create your views here.
 
@@ -27,6 +30,13 @@ class Index(generic.ListView):
 
 
 def user_page(request):
-    posts = Post.objects.all()
-    print(request)
+    username = request.user
+    queryset = Post.objects.filter(author=username)
+
+    return render(
+        request,
+        "blog/user_page.html",
+        {"username": username,"posts": queryset},
+    )
+    
     
