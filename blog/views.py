@@ -20,7 +20,11 @@ class Index(generic.ListView):
         post_list = []
         for p in posts:
             post_list.append(p)
-        display_posts = random.sample(post_list, 4)
+        
+        if len(post_list) >= 4:
+            display_posts = random.sample(post_list, 4)
+        else:
+            display_posts = post_list
         
         return display_posts
 

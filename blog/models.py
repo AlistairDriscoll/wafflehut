@@ -73,10 +73,13 @@ class UserRank(models.Model):
     Partly taken from the 'I think therefore I blog' code institute module
     """
     wafflescore = models.IntegerField(default=0)
-    author = models.ForeignKey(
+    author = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="user_rank"
     )
     full_name = models.CharField(max_length=100, blank=True)
     bio = models.TextField(blank=True)
     dof = models.DateField(auto_now_add=True)
     user_image = CloudinaryField('image', default='placeholder')
+
+    def __str__(self):
+        return f"{self.author}'s User Rank"
