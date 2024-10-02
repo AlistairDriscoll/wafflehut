@@ -8,8 +8,8 @@ from django.contrib.auth.models import User
 @receiver(post_save, sender=User)
 def create_rank(sender, instance, created, **kwargs):
     if created:
-        UserRank.objects.create(user=instance)
+        UserRank.objects.create(author=instance)
 
 @receiver(post_save, sender=User)
 def save_rank(sender, instance, **kwargs):
-    instance.userrank.save()
+    instance.user_rank.save()

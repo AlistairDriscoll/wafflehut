@@ -22,3 +22,8 @@ Extra personalised styling that writes over the bootstrap styles
 .red-hover:hover {
     color: #fa1907;
 }
+
+h1 {
+    text-align: center;
+}
+
