@@ -2,11 +2,23 @@
 
 {% block content %}
 
-<h1 class="mx-auto">Some Hot Waffle:</h1>
+<h1>Some Hot Waffle:</h1>
+
+<div class="row">
+    <div class="col-4">
+
+    </div>
+    <div class="col-8">
+        
+    </div>
+</div>
 {% for post in object_list %}
-<h2>{{post.title}}</h2>
-<p>{{post.excerpt}}</p>
-<p>Author: {{post.author}}</p>
+<div class="post">
+    <h2>{{post.title}}</h2>
+    <p>{{post.excerpt}}</p>
+    <p>Author: {{post.author}}</p>
+</div>
+
 {% endfor %}
 
 {% endblock %}

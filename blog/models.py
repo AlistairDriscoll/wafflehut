@@ -32,9 +32,8 @@ class Post(models.Model):
     featured_image = CloudinaryField('image', default='placeholder')
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    excerpt = models.TextField(blank=True)
-    reactions = models.ForeignKey(
-        Reaction, on_delete=models.CASCADE, related_name="reaction", null=True
+    reactions = models.ManyToManyField(
+        Reaction, related_name="reaction", blank=True
     )
 
     class Meta:

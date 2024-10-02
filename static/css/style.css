@@ -27,3 +27,8 @@ h1 {
     text-align: center;
 }
 
+.post {
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+}

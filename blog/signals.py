@@ -1,4 +1,4 @@
-"""Signals for the blog app"""
+"""Signals for the blog app, when a user is created the signals create for them their UserRank model"""
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver

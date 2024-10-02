@@ -1,6 +1,5 @@
 from django.shortcuts import render, reverse
 from django.views import generic
-
 from .models import Post
 from django.contrib.auth.models import User
 import random
