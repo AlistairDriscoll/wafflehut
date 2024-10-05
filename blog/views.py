@@ -4,7 +4,6 @@ from .models import Post
 from django.contrib.auth.models import User
 import random
 
-from django.http import HttpRequest
 
 # Create your views here.
 

@@ -6,18 +6,6 @@ REACTIONS = ((0, "This is absolute complete waffle"), (1, "This is pretty much w
 
 # Create your models here.
 
-class Reaction(models.Model):
-    """
-    Stores a single reaction entry related to :model:`auth.User`
-    Partly taken from the 'I think therfore I blog' code institute module
-    """
-    author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="reaction_clicker"
-    )
-
-    reaction_option = models.IntegerField(choices=REACTIONS, null=True)
-
-
 class Post(models.Model):
     """
     Stores a single blog post entry related to :model:`auth.User`
@@ -32,12 +20,9 @@ class Post(models.Model):
     featured_image = CloudinaryField('image', default='placeholder')
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    reactions = models.ManyToManyField(
-        Reaction, related_name="reaction", blank=True
-    )
 
     class Meta:
-        ordering = ["created_on"]
+        ordering = ["-created_on"]
 
     def __str__(self):
         return f"{self.title} | written by {self.author}"
@@ -56,7 +41,6 @@ class Comment(models.Model):
         User, on_delete=models.CASCADE, related_name="commenter"
     )
     body = models.TextField()
-    approved = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -72,7 +56,7 @@ class UserRank(models.Model):
     Partly taken from the 'I think therefore I blog' code institute module
     """
     wafflescore = models.IntegerField(default=0)
-    author = models.OneToOneField(
+    user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="user_rank"
     )
     full_name = models.CharField(max_length=100, blank=True)
@@ -81,4 +65,31 @@ class UserRank(models.Model):
     user_image = CloudinaryField('image', default='placeholder')
 
     def __str__(self):
-        return f"{self.author}'s User Rank"
+        return f"{self.user}'s User Rank"
+
+
+class Reaction(models.Model):
+    """
+    Stores a single reaction entry related to :model:`auth.User`
+    Partly taken from the 'I think therfore I blog' code institute module
+    """
+    reactor = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="reactor"
+    )
+
+    posts = models.ManyToManyField(
+        Post, related_name="reactions"
+    )
+
+    reaction_option = models.IntegerField(choices=REACTIONS)
+
+
+class UserReaction(models.Model):
+    """Model to ensure the user can only react to a post once"""
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    reaction = models.ForeignKey(Reaction, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user', 'post')
