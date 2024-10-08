@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment, UserRank
+from .models import Post, Comment, UserRank, Reaction, UserReaction
 from django_summernote.admin import SummernoteModelAdmin
 
 @admin.register(Post)
@@ -13,3 +13,5 @@ class PostAdmin(SummernoteModelAdmin):
 
 admin.site.register(Comment)
 admin.site.register(UserRank)
+admin.site.register(UserReaction)
+admin.site.register(Reaction)

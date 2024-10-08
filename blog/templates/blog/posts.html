@@ -1,24 +1,23 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <h1>Some Hot Waffle:</h1>
 
-<div class="row">
-    <div class="col-4">
-
-    </div>
-    <div class="col-8">
-        
-    </div>
-</div>
 {% for post in object_list %}
-<div class="post">
-    <h2>{{post.title}}</h2>
-    <p>{{post.excerpt}}</p>
-    <p>Author: {{post.author}}</p>
+<div class="col-md-4">
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="image-flash">
+        <p class="author">Author: {{ post.author }}</p>
+      </div>
+
+      <a href="{% url 'post_detail' post.slug %}" class="post-link">
+        <h2 class="card-title">{{ post.title }}</h2>
+        <p class="card-text">{{ post.excerpt }}</p>
+      </a>
+
+      <hr />
+      <p class="card-text text-muted h6">{{ post.created_on}}</p>
+    </div>
+  </div>
 </div>
-
-{% endfor %}
-
-{% endblock %}
+{% endfor %} {% endblock %}

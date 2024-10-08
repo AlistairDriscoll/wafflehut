@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from cloudinary.models import CloudinaryField
+
 
 REACTIONS = ((0, "This is absolute complete waffle"), (1, "This is pretty much waffle"), (2, "I neither agree nor disagree with this waffle"), (3, "I fully agree with this waffle"))
 
@@ -17,7 +17,6 @@ class Post(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_posts"
     )
-    featured_image = CloudinaryField('image', default='placeholder')
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
 
@@ -62,7 +61,6 @@ class UserRank(models.Model):
     full_name = models.CharField(max_length=100, blank=True)
     bio = models.TextField(blank=True)
     dof = models.DateField(auto_now_add=True)
-    user_image = CloudinaryField('image', default='placeholder')
 
     def __str__(self):
         return f"{self.user}'s User Rank"
@@ -85,7 +83,10 @@ class Reaction(models.Model):
 
 
 class UserReaction(models.Model):
-    """Model to ensure the user can only react to a post once"""
+    """
+    Through model to use so that each user can only react to a post once
+    Needed because the posts and reactions have a many-to-many ratio
+    """
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

@@ -46,7 +46,7 @@
                 <li class="nav-item"><a class="nav-link red-hover {% if request.path == user_page %}active" aria-current="page{% endif %}"
                     href="{% url 'user_page' %}">Your User Page</a></li>
                 <li class="nav-item"><a class="nav-link red-hover {% if request.path == logout_url %}active" aria-current="page{% endif %}"
-                    href="{% url 'index' %}">Logout</a></li>
+                    href="{% url 'account_logout' %}">Logout</a></li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link red-hover {% if request.path == login_url %}active" aria-current="page{% endif %}"
                     href="{% url 'account_login' %}">Login</a></li>
@@ -58,6 +58,9 @@
     </nav>
     {% block content %}
     <!-- Content Goes here -->
+     {% if user.is_authenticated %}
+     <button></button>
+     {% endif %}
 
     {% endblock content %}
     <script src="https://kit.fontawesome.com/bc5efad812.js" crossorigin="anonymous"></script>

@@ -1,10 +1,8 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, get_object_or_404
 from django.views import generic
-from .models import Post
+from .models import Post, UserRank
 from django.contrib.auth.models import User
 import random
-
-
 # Create your views here.
 
 class Index(generic.ListView): 
@@ -34,6 +32,8 @@ class Index(generic.ListView):
 def user_page(request):
     username = request.user
     queryset = Post.objects.filter(author=username)
+    user_rank = get_object_or_404(UserRank, user=request.user)
+
 
     return render(
         request,
