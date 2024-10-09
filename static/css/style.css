@@ -27,8 +27,58 @@ h1 {
     text-align: center;
 }
 
+.post-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
 .post {
+    background-color: #f9b639;
     border-style: solid;
     border-width: 2px;
     border-color: black;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 20px;
+    
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.post h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.post .author {
+    font-size: 14px;
+    color: #777;
+}
+
+.post .content {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.post .created_on {
+    font-size: 16px;
+    color: white;
+}
+
+.post button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-button {
+    background-color: lightblue; /* Light blue for edit button */
+}
+
+.delete-button {
+    background-color: red; /* Red for delete button */
+    color: white;
 }

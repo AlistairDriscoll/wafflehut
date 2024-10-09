@@ -15,6 +15,8 @@ class Index(generic.ListView):
 
         post_list = []
         for p in posts:
+            if len(p.content) >= 50:
+                p.content = p.content[:30] + '...'
             post_list.append(p)
         
         if len(post_list) >= 4:
