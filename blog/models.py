@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from django.contrib.auth.models import User
 
 
@@ -12,7 +13,7 @@ class Post(models.Model):
     The model detail here partly taken from the 'I think therfore I blog' code institute module
     """
     
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_posts"
@@ -22,6 +23,11 @@ class Post(models.Model):
 
     class Meta:
         ordering = ["-created_on"]
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.post.title)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.title} | written by {self.author}"

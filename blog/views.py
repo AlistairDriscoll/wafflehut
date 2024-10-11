@@ -1,5 +1,4 @@
 from django.shortcuts import render, reverse, get_object_or_404
-from django.utils.text import slugify
 from django.core.paginator import Paginator
 from django.views import generic
 from .models import Post, UserRank
@@ -59,11 +58,6 @@ def write_post(request):
         post_form = PostForm(data=request.POST)
         if post_form.is_valid():
             post = post_form.save()
-            count = Post.objects.filter(title=post.title).count()
-            if count == 0:
-                post.slug = slugify(post.title)
-            else:
-                post.slug = slugify(post.title) + '-' + count
             post.author = request.user
             post.author_id = request.user_id
             post.save()
