@@ -52,8 +52,9 @@ def user_page(request):
     )
 
 def write_post(request):
-    
-    
+    """
+    View for taking the PostForm data and storing it in the database
+    """
     if request.method == "POST":
         post_form = PostForm(data=request.POST)
         if post_form.is_valid():
@@ -67,4 +68,21 @@ def write_post(request):
         request,
         "blog/write_post.html",
         {"post_form": post_form},
-    ) 
+    )
+
+def view_full_post(request, slug):
+    """
+    View to display a full blog post
+    """
+    queryset = Post.objects.all()
+    post = get_object_or_404(queryset, slug=slug)
+    post.title = post.title.capitalize()
+
+    return render(
+        request,
+        "blog/view_full_post.html",
+        {"post": post,},
+    )
+    
+    
+    

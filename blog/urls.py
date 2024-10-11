@@ -6,4 +6,5 @@ urlpatterns = [
     # path('<str:user>/', views.user_page, name='user_page'),
     path('user_page/', views.user_page, name='user_page'),
     path('write_post/', views.write_post, name='write_post'),
+    path('<slug:slug>/', views.view_full_post, name='view_full_post'),
 ]

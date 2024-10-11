@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>{{ post.title }}</h1>
+
+<div>By: {{ post.author }}</div>
+
+{{ post.content }}
+
+{{ post.created_on }}
+
+<button class="edit-button">Edit</button>
+<button class="delete-button">Delete</button>
+
+{% endblock %}
