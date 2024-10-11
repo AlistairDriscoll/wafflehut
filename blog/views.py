@@ -57,10 +57,9 @@ def write_post(request):
     if request.method == "POST":
         post_form = PostForm(data=request.POST)
         if post_form.is_valid():
-            post = post_form.save()
-            post.author = request.user
-            post.author_id = request.user_id
-            post.save()
+            instance = post_form.save(commit=False)
+            instance.author = User.objects.get(username=request.user.username)
+            instance.save()
     
     post_form = PostForm()
     
