@@ -4,21 +4,35 @@
 
 <!-- User Rank Information -->
 <h2>Your Rank: {{ user_rank.wafflescore }}</h2>
-<p>Full Name: {{ user_rank.full_name }}</p>
-<p>Bio: {{ user_rank.bio }}</p>
-<p>Date of First Entry: {{ user_rank.dof }}</p>
-<img
-  src="{{ user_rank.user_image.url }}"
-  alt="{{ username }}'s profile image"
-/>
+<div class="row">
+  <div class="col-12 col-md-4">
+    <p>
+      Full Name:{% if user_rank.full_name == "" %} {{ username }} Has not put
+      their full name {% else %}{{ user_rank.full_name }}{% endif %}
+    </p>
+    <p>Bio: {{ user_rank.bio }}</p>
+    <p>Date of First Entry: {{ user_rank.dof }}</p>
+  </div>
+  <h3>Your Posts</h3>
+  <div class="col-12 col-md-8">
+    <div class="row">
+      <ul>
+        {% for post in posts %}
+        <div class="post col-lg-6 col-12 mb-4">
+          <h2>{{ post.title }}</h2>
+          <div class="author">Written by {{ post.author }}</div>
+          <div class="created_on">Created on: {{ post.created_on|date:"F j, Y" }}</div>
+          <div class="content">{{ post.content|safe }}</div>
+          {% if username == post.author %}
+          <button class="edit-button">Edit</button>
+          <button class="delete-button">Delete</button>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </ul>
+    </div>
+    
+  </div>
 
-<h3>Your Posts</h3>
-<ul>
-  {% for post in posts %}
-  <li>{{ post.title }} - {{ post.created_at }}</li>
-  {% empty %}
-  <li>No posts available.</li>
-  {% endfor %}
-</ul>
-
+</div>
 {% endblock %}

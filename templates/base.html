@@ -47,6 +47,8 @@
                     href="{% url 'user_page' %}">Your User Page</a></li>
                 <li class="nav-item"><a class="nav-link red-hover {% if request.path == logout_url %}active" aria-current="page{% endif %}"
                     href="{% url 'account_logout' %}">Logout</a></li>
+                <li class="nav-item"><a class="nav-link red-hover {% if request.path == write_post %}active" aria-current="page{% endif %}"
+                    href="{% url 'write_post' %}">Write Some Waffle</a></li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link red-hover {% if request.path == login_url %}active" aria-current="page{% endif %}"
                     href="{% url 'account_login' %}">Login</a></li>

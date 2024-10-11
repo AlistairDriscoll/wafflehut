@@ -12,8 +12,8 @@ class Post(models.Model):
     The model detail here partly taken from the 'I think therfore I blog' code institute module
     """
     
-    title = models.CharField(max_length=200, unique=True)
-    slug = models.SlugField(max_length=200, unique=True)
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_posts"
     )

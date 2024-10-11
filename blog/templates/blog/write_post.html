@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+{% if user.is_authenticated %}
+<h1>Write Some Waffle Here!</h1>
+
+<form id="PostForm" method="post">
+    {{ post_form | crispy }}
+    {% csrf_token %}
+    <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
+</form>
+
+{% else %}
+<h1>Log in to leave a comment</h1>
+{% endif %}
+
+{% endblock %}

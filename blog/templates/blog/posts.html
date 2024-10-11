@@ -6,14 +6,16 @@
 <div class="post-container">
     <div class="container">
         <div class="row justify-content-center">
-            {% for post in object_list %}
+            {% for post in posts %}
             <div class="post col-lg-6 col-12 mb-4">
                 <h2>{{ post.title }}</h2>
                 <div class="author">Written by {{ post.author }}</div>
                 <div class="created_on">Created on: {{ post.created_on|date:"F j, Y" }}</div>
                 <div class="content">{{ post.content|safe }}</div>
+                {% if username == post.author %}
                 <button class="edit-button">Edit</button>
                 <button class="delete-button">Delete</button>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
