@@ -1,5 +1,89 @@
-/* Extra personalised styling that writes over the bootstrap styles */
+/***
 
-body {
-    background-color: pink;
+Extra personalised styling that writes over the bootstrap styles
+
+***/
+
+
+/* Navbar styles */
+
+.east-sea-dokdo-regular {
+    font-family: "East Sea Dokdo", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 35px;
+}
+
+
+.max-logo-height {
+    max-height: 100px;
+}
+
+.red-hover:hover {
+    color: #fa1907;
+}
+
+h1 {
+    text-align: center;
+}
+
+.post-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.post {
+    background-color: #f9b639;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 20px;
+    height: 240px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.post h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.post .author {
+    font-size: 14px;
+    color: #777;
+}
+
+.post .content {
+    margin: 10px;
+    font-size: 16px;
+}
+
+.post .created_on {
+    font-size: 16px;
+    color: white;
+}
+
+.post button,
+a.button {
+    margin: 4px;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.delete-button {
+    background-color: red; /* Red for delete button */
+    color: white;
+}
+
+.edit-button,
+.full-post-button {
+    background-color: lightblue; /* Light blue for other buttons */
+    color: black;
 }

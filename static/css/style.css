@@ -77,7 +77,7 @@ a.button {
     text-decoration: none;
 }
 
-.delete-button {
+.delete-btn {
     background-color: red; /* Red for delete button */
     color: white;
 }

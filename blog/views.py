@@ -1,9 +1,12 @@
 from django.shortcuts import render, reverse, get_object_or_404
 from django.core.paginator import Paginator
 from django.views import generic
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.http import HttpResponseRedirect
 from .models import Post, UserRank
 from .forms import PostForm
-from django.contrib.auth.models import User
+
 import random
 # Create your views here.
 
@@ -84,5 +87,18 @@ def view_full_post(request, slug):
         {"post": post,},
     )
     
+def delete_post(request, slug, post_id):
+    """
+    View to delete a post, the 'if' statement was taken from Code Institute and edited to suit this view
+    """
+
+    post = get_object_or_404(Post, slug=slug)
     
+    if post.author == request.user:
+        post.delete()
+        messages.add_message(request, messages.SUCCESS, 'Comment deleted!')
+    else:
+        messages.add_message(request, messages.ERROR, 'You can only delete your own comments!')
+
+    return HttpResponseRedirect(reverse('user_page'))
     
