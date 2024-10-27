@@ -1,6 +1,12 @@
 {% extends "base.html" %} {% block content %}
 
-<h1>Hello, {{ username }}</h1>
+{% url 'view_full_post' as view_full_post %}
+
+{% if user.is_authenticated and user.username == username %}
+<h1>Hello, {{ user.username }}</h1>
+{% else %}
+<h1>{{ username }}'s Profile</h1>
+{% endif %}
 
 <!-- User Rank Information -->
 <h2>Your Rank: {{ user_rank.wafflescore }}</h2>
@@ -13,8 +19,17 @@
     <p>Bio: {{ user_rank.bio }}</p>
     <p>Date of First Entry: {{ user_rank.dof }}</p>
   </div>
-  <h3>Your Posts</h3>
+</div>
+
+<!--If statement to display users posts if they have any-->
+<div class="row">
+  {% if post_count == 0 %}
   <div class="col-12 col-md-8">
+    <h3>{{ username }} is Yet to Waffle.</h3>
+  </div>
+  {% else %}
+  <div class="col-12 col-md-8">
+    <h3>{{ username }}'s Posts</h3>
     <div class="row">
       <ul>
         {% for post in posts %}
@@ -23,16 +38,17 @@
           <div class="author">Written by {{ post.author }}</div>
           <div class="created_on">Created on: {{ post.created_on|date:"F j, Y" }}</div>
           <div class="content">{{ post.content|safe }}</div>
-          {% if username == post.author %}
-          <button class="edit-button">Edit</button>
-          <button class="delete-button">Delete</button>
-          {% endif %}
+          <a class="full-post-button" href="{% if post_count == 0 %}#{% else %}{{ view_full_post }}{% endif %}">See Full
+            Post</a>
         </div>
-        {% endfor %}
       </ul>
+      {% endfor %}
     </div>
-    
   </div>
-
 </div>
+{% endif %}
+
+
+
+
 {% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse, get_object_or_404
+from django.shortcuts import render, reverse, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.views import generic
 from django.contrib.auth.models import User
@@ -41,29 +41,50 @@ def Index(request):
     )
 
 
-def user_page(request):
-    username = request.user
-    queryset = Post.objects.filter(author=username)
-    posts = Paginator(queryset, 4)
-    user_rank = get_object_or_404(UserRank, user=request.user)
+def user_page(request, username):
+    """
+    View to show a users profile
+    """
+
+    user = get_object_or_404(User, username=username)
+    queryset = Post.objects.filter(author=user)
+    post_count = queryset.count()
+
+    paginator = Paginator(queryset, 4)
+    page_number = request.GET.get('page')
+    posts = paginator.get_page(page_number)
+
     
+    user_rank = get_object_or_404(UserRank, user=user)
+    
+
+    def capitalize(username):
+        return username[0].upper() + username[1:]
+
+    if username[0].islower():
+        username = capitalize(username)        
 
     return render(
         request,
         "blog/user_page.html",
-        {"username": username,"posts": posts, "user_rank": user_rank},
+        {"username": username,"posts": posts, "user_rank": user_rank, "post_count": post_count,},
     )
+
 
 def write_post(request):
     """
     View for taking the PostForm data and storing it in the database
     """
+
     if request.method == "POST":
-        post_form = PostForm(data=request.POST)
-        if post_form.is_valid():
-            instance = post_form.save(commit=False)
-            instance.author = User.objects.get(username=request.user.username)
-            instance.save()
+        if request.user.is_authenticated:
+            post_form = PostForm(data=request.POST)
+            if post_form.is_valid():
+                instance = post_form.save(commit=False)
+                instance.author = User.objects.get(username=request.user.username)
+                instance.save()
+                messages.add_message(request, messages.SUCCESS, 'Post Uploaded Succesfully!!')
+                return redirect('user_page', username=request.user)
     
     post_form = PostForm()
     
@@ -73,12 +94,13 @@ def write_post(request):
         {"post_form": post_form},
     )
 
+
 def view_full_post(request, slug):
     """
     View to display a full blog post
     """
-    queryset = Post.objects.all()
-    post = get_object_or_404(queryset, slug=slug)
+    
+    post = get_object_or_404(Post, slug=slug)
     post.title = post.title.capitalize()
 
     return render(
@@ -86,7 +108,8 @@ def view_full_post(request, slug):
         "blog/view_full_post.html",
         {"post": post,},
     )
-    
+
+
 def delete_post(request, slug, post_id):
     """
     View to delete a post, the 'if' statement was taken from Code Institute and edited to suit this view
@@ -101,4 +124,7 @@ def delete_post(request, slug, post_id):
         messages.add_message(request, messages.ERROR, 'You can only delete your own comments!')
 
     return HttpResponseRedirect(reverse('user_page'))
+
+
+
     

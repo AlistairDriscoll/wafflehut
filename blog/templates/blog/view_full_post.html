@@ -7,6 +7,7 @@
 
 {{ post.content }} {{ post.created_on }}
 
+{% if user.is_authenticated and user == post.author %}
 <button class="edit-button" post_id="{{ post.id }}" post_slug="{{ post.slug }}">Edit</button>
 <button
   class="delete-post-btn delete-btn btn btn-warning"
@@ -15,6 +16,7 @@
 >
   Delete
 </button>
+{% endif %}
 
 <!-- Deletion Modal, taken and modified from bootstraps documentation -->
 <div class="modal" tabindex="-1" role="dialog" id="deleteModal">

@@ -6,6 +6,7 @@
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,8 +46,10 @@
                         aria-current="page{% endif %}" href="{% url 'index' %}">Home</a></li>
 
                 {% if user.is_authenticated %}
+                {% with user.username as username %}
                 <li class="nav-item"><a class="nav-link red-hover {% if request.path == user_page %}active"
-                        aria-current="page{% endif %}" href="{% url 'user_page' %}">Your User Page</a></li>
+                        aria-current="page{% endif %}" href="{% url 'user_page' username=username %}">Your User Page</a></li>
+                {% endwith %}
                 <li class="nav-item"><a class="nav-link red-hover {% if request.path == logout_url %}active"
                         aria-current="page{% endif %}" href="{% url 'account_logout' %}">Logout</a></li>
                 <li class="nav-item"><a class="nav-link red-hover {% if request.path == write_post %}active"
