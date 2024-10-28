@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import Post, UserRank
-from .forms import PostForm
+from .forms import PostForm, EditForm
 
 import random
 # Create your views here.
@@ -99,14 +99,18 @@ def view_full_post(request, slug):
     """
     View to display a full blog post
     """
-    
+
+    def capitalize(title):
+        return title[0].upper() + title[1:]
+
     post = get_object_or_404(Post, slug=slug)
-    post.title = post.title.capitalize()
+    post.title = capitalize(post.title)
+    form = EditForm(instance=post)
 
     return render(
         request,
         "blog/view_full_post.html",
-        {"post": post,},
+        {"post": post, "edit_form": form},
     )
 
 
@@ -119,12 +123,33 @@ def delete_post(request, slug, post_id):
     
     if post.author == request.user:
         post.delete()
-        messages.add_message(request, messages.SUCCESS, 'Comment deleted!')
+        messages.add_message(request, messages.SUCCESS, 'Post deleted!')
     else:
-        messages.add_message(request, messages.ERROR, 'You can only delete your own comments!')
+        messages.add_message(request, messages.ERROR, 'You can only delete your own posts!')
 
-    return HttpResponseRedirect(reverse('user_page'))
+    return HttpResponseRedirect(reverse('user_page', kwargs={'username': post.author.username}))
 
 
+def edit_post(request, post_id, slug):
+    """
+    View to edit a Post
+    """
 
-    
+    post = get_object_or_404(Post, slug=slug)
+    edit_form = EditForm(data=request.POST, instance=post)
+
+    if request.method == "POST":
+
+        if edit_form.is_valid() and post.author == request.user:
+            post = edit_form.save()
+            messages.add_message(request, messages.SUCCESS, 'Post Updated!')
+            return redirect('view_full_post', slug=post.slug)
+
+        else:
+            messages.add_message(request, messages.ERROR, 'Error updating post!')
+
+    return render(
+        request,
+        "blog/view_full_post.html",
+        {'edit_form': edit_form, 'post': post}
+    )

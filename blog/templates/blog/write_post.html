@@ -5,7 +5,7 @@
 {% if user.is_authenticated %}
 <h1>Write Some Waffle Here!</h1>
 
-<form id="PostForm" method="post">
+<form id="postForm" method="post">
     {{ post_form | crispy }}
     {% csrf_token %}
     <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>

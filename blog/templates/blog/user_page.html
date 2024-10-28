@@ -1,6 +1,5 @@
 {% extends "base.html" %} {% block content %}
 
-{% url 'view_full_post' as view_full_post %}
 
 {% if user.is_authenticated and user.username == username %}
 <h1>Hello, {{ user.username }}</h1>
@@ -38,8 +37,10 @@
           <div class="author">Written by {{ post.author }}</div>
           <div class="created_on">Created on: {{ post.created_on|date:"F j, Y" }}</div>
           <div class="content">{{ post.content|safe }}</div>
-          <a class="full-post-button" href="{% if post_count == 0 %}#{% else %}{{ view_full_post }}{% endif %}">See Full
+          {% if post_count > 0 %}
+          <a class="full-post-button" href="{% url 'view_full_post' slug=post.slug %}">See Full
             Post</a>
+          {% endif %}
         </div>
       </ul>
       {% endfor %}

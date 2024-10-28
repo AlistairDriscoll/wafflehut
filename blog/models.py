@@ -77,6 +77,7 @@ class Reaction(models.Model):
     Stores a single reaction entry related to :model:`auth.User`
     Partly taken from the 'I think therfore I blog' code institute module
     """
+
     reactor = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="reactor"
     )

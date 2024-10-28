@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block content %}
-
+{% load crispy_forms_tags %}
 
 <h1>{{ post.title }}</h1>
 
@@ -8,8 +8,21 @@
 {{ post.content }} {{ post.created_on }}
 
 {% if user.is_authenticated and user == post.author %}
-<button class="edit-button" post_id="{{ post.id }}" post_slug="{{ post.slug }}">Edit</button>
+
 <button
+  type="button"
+  class="edit-button"
+  post_id="{{ post.id }}"
+  post_slug="{{ post.slug }}"
+  post_content="{{ post.content }}"
+  post_title="{{ post.title }}"
+  >
+    Edit
+</button>
+
+
+<button
+  type="button"
   class="delete-post-btn delete-btn btn btn-warning"
   post_id="{{ post.id }}"
   post_slug="{{ post.slug }}"
@@ -41,4 +54,25 @@
     </div>
   </div>
 
+
+  <div class="modal" tabindex="-1" role="dialog" id="editModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle"></h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="modalBody">
+          <form id="editForm" method="post" action="{% url 'edit_post' post.slug post.id %}">
+            {% csrf_token %}
+            {{ edit_form | crispy }}
+            <button type="submit" class="btn">Submit</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
