@@ -77,6 +77,10 @@ def user_page(request, username):
 def write_post(request):
     """
     View for taking the PostForm data and storing it in the database
+    - Checks to see if the user is autheinticated, then displays the PostForm
+    - Checks to see if the form is valid, and if so saves to the database with a message stating success
+    - Gets the users wafflescore and adds a point to it
+    - Takes the user to their webpage where their new post should appear
     """
 
     if request.method == "POST":
@@ -87,6 +91,12 @@ def write_post(request):
                 instance.author = User.objects.get(username=request.user.username)
                 instance.save()
                 messages.add_message(request, messages.SUCCESS, 'Post Uploaded Succesfully!!')
+                
+                user_rank = get_object_or_404(UserRank, user=request.user)
+                user_rank.wafflescore += 1
+                user_rank.save()
+                print(user_rank.wafflescore)
+
                 return redirect('user_page', username=request.user)
     
     post_form = PostForm()
@@ -120,12 +130,20 @@ def view_full_post(request, slug):
 def delete_post(request, slug, post_id):
     """
     View to delete a post, the 'if' statement was taken from Code Institute and edited to suit this view
+    - Gets the post from the database 
+    - Checks to see if the post author is the same as the request user
+    - If so deletes the record and knocks the users wafflescore down a point before saving
+    - Adds a message depending on if the user was authorised to delete
+    - Goes back to the user page
     """
 
     post = get_object_or_404(Post, slug=slug)
     
     if post.author == request.user:
         post.delete()
+        user_rank = get_object_or_404(UserRank, user=post.author)
+        user_rank.wafflescore =- 1
+        user_rank.save()
         messages.add_message(request, messages.SUCCESS, 'Post deleted!')
     else:
         messages.add_message(request, messages.ERROR, 'You can only delete your own posts!')

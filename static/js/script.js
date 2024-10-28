@@ -43,3 +43,4 @@ for (let button of editButtons) {
         editModal.show();
     })
 }
+

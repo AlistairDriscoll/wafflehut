@@ -1,55 +1,83 @@
 {% extends "base.html" %} {% block content %}
 
-
-{% if user.is_authenticated and user.username == username %}
-<h1>Hello, {{ user.username }}</h1>
-{% else %}
-<h1>{{ username }}'s Profile</h1>
-{% endif %}
-
-<!-- User Rank Information -->
-<h2>Your Rank: {{ user_rank.wafflescore }}</h2>
-<div class="row">
-  <div class="col-12 col-md-4">
-    <p>
-      Full Name:{% if user_rank.full_name == "" %} {{ username }} Has not put
-      their full name {% else %}{{ user_rank.full_name }}{% endif %}
-    </p>
-    <p>Bio: {{ user_rank.bio }}</p>
-    <p>Date of First Entry: {{ user_rank.dof }}</p>
-  </div>
-</div>
-
-<!--If statement to display users posts if they have any-->
-<div class="row">
-  {% if post_count == 0 %}
-  <div class="col-12 col-md-8">
-    <h3>{{ username }} is Yet to Waffle.</h3>
-  </div>
-  {% else %}
-  <div class="col-12 col-md-8">
-    <h3>{{ username }}'s Posts</h3>
-    <div class="row">
-      <ul>
-        {% for post in posts %}
-        <div class="post col-lg-6 col-12 mb-4">
-          <h2>{{ post.title }}</h2>
-          <div class="author">Written by {{ post.author }}</div>
-          <div class="created_on">Created on: {{ post.created_on|date:"F j, Y" }}</div>
-          <div class="content">{{ post.content|safe }}</div>
-          {% if post_count > 0 %}
-          <a class="full-post-button" href="{% url 'view_full_post' slug=post.slug %}">See Full
-            Post</a>
-          {% endif %}
-        </div>
-      </ul>
-      {% endfor %}
+<!-- Displays the username at the top with a border beneath -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 border-bottom border-2">
+      {% if user.is_authenticated and user.username == username %}
+      <h1>Hello, {{ user.username }}</h1>
+      {% else %}
+      <h1>{{ username }}'s Profile</h1>
+      {% endif %}
     </div>
   </div>
 </div>
+
+
+<!-- User Rank Information -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-3 border-right border-md-3">
+      <h2 id="wafflerankHeader" user_score="{{ user_rank.wafflescore }}"></h2>
+      <p>
+        Full Name:{% if user_rank.full_name == "" %} {{ username }} Has not put
+        their full name {% else %}{{ user_rank.full_name }}{% endif %}
+      </p>
+      <p>Bio: {{ user_rank.bio }}</p>
+      <p>{{ username }} started waffling on: {{ user_rank.dof }}</p>
+
+      {% if user.is_authenticated and user.username == username %}
+      <button type="button" class="btn">Update your information</button>
+      {% endif %}
+    </div>
+
+    <!--If statement to display users posts if they have any, followed by an for loop if there is -->
+
+    {% if post_count == 0 %}
+    <div class="col-12 col-md-9">
+      <h3>{{ username }} is Yet to Waffle.</h3>
+    </div>
+    {% else %}
+    <div class="col-12 col-md-9">
+      <h3>{{ username }}'s Posts</h3>
+      <div class="row">
+        <ul>
+          {% for post in posts %}
+          <div class="post col-lg-6 col-12 mb-4">
+            <h2>{{ post.title }}</h2>
+            <div class="author">Written by {{ post.author }}</div>
+            <div class="created_on">Created on: {{ post.created_on|date:"F j, Y" }}</div>
+            <div class="content">{{ post.content|safe }}</div>
+            {% if post_count > 0 %}
+            <a class="full-post-button" href="{% url 'view_full_post' slug=post.slug %}">See Full
+              Post</a>
+            {% endif %}
+          </div>
+        </ul>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Navbar for going between each pages, made with the help of chatGPT -->
+
+{% if posts.has_other_pages %}
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        {% if posts.has_previous %}
+        <li class="page-item">
+            <a href="?page={{ posts.previous_page_number }}" class="page-link">&laquo; PREV</a>
+        </li>
+        {% endif %}
+        {% if posts.has_next %}
+        <li class="page-item">
+            <a href="?page={{ posts.next_page_number }}" class="page-link">NEXT &raquo;</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
 {% endif %}
-
-
-
 
 {% endblock %}
