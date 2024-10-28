@@ -32,7 +32,7 @@ for (let button of deletePostButtons) {
  * Edit post functionality
  * Adds event listener to the edit button on the 'view_full_post.html' page
  * Changes the title of the modal to the title of the post
- * Then shows the modal
+ * Then shows the editModal
  */
 
 for (let button of editButtons) {

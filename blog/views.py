@@ -1,13 +1,16 @@
+import random
+
 from django.shortcuts import render, reverse, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.views import generic
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+
 from .models import Post, UserRank
 from .forms import PostForm, EditForm
 
-import random
+
 # Create your views here.
 
 def Index(request):

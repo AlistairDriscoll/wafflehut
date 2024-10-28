@@ -20,7 +20,7 @@ Extra personalised styling that writes over the bootstrap styles
 }
 
 .red-hover:hover {
-    color: #fa1907;
+    color: #fa1907 !important;
 }
 
 h1 {
