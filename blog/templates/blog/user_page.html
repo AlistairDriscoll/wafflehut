@@ -1,4 +1,5 @@
 {% extends "base.html" %} {% block content %}
+{% load crispy_forms_tags %}
 
 <!-- Displays the username at the top with a border beneath -->
 <div class="container-fluid">
@@ -23,11 +24,25 @@
         Full Name:{% if user_rank.full_name == "" %} {{ username }} Has not put
         their full name {% else %}{{ user_rank.full_name }}{% endif %}
       </p>
+
+      {% if user_rank.bio == "" %}
+      <p>No user bio for this page</p>
+      {% else %}
       <p>Bio: {{ user_rank.bio }}</p>
+      {% endif %}
+
       <p>{{ username }} started waffling on: {{ user_rank.dof }}</p>
 
       {% if user.is_authenticated and user.username == username %}
-      <button type="button" class="btn">Update your information</button>
+      <button
+        user_bio="{{ user_rank.bio }}"
+        full_name="{{ user_rank.full_name }}"
+        type="button"
+        id="updateUser"
+        class="btn"
+        >
+        Update your information
+      </button>
       {% endif %}
     </div>
 
@@ -43,7 +58,7 @@
       <div class="row">
         <ul>
           {% for post in posts %}
-          <div class="post col-lg-6 col-12 mb-4">
+          <div class="post col-lg-6 col-12 m-2">
             <h2>{{ post.title }}</h2>
             <div class="author">Written by {{ post.author }}</div>
             <div class="created_on">Created on: {{ post.created_on|date:"F j, Y" }}</div>
@@ -61,7 +76,7 @@
   </div>
 </div>
 
-<!-- Navbar for going between each pages, made with the help of chatGPT -->
+<!-- Navbar for going between each pages, made with the help of chatGPT and code institute -->
 
 {% if posts.has_other_pages %}
 <nav aria-label="Page navigation">
@@ -78,6 +93,34 @@
         {% endif %}
     </ul>
 </nav>
+{% endif %}
+
+
+{% if user.is_authenticated and user.username == username %}
+
+<!--Modal to display the form for the user to update their info -->
+
+<div class="modal" tabindex="-1" role="dialog" id="updateUserModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">Update your details here!</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <form id="userForm" method="post" action="{% url 'edit_user' username=user.username  %}">
+          {% csrf_token %}
+          {{ user_form | crispy }}
+          <button type="submit" class="btn">Submit</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endif %}
 
 {% endblock %}

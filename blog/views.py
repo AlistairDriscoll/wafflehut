@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 
 from .models import Post, UserRank
-from .forms import PostForm, EditForm
+from .forms import PostForm, UserRankForm, EditForm
 
 
 # Create your views here.
@@ -48,7 +48,7 @@ def user_page(request, username):
     """
     View to show a users profile
     """
-
+    
     user = get_object_or_404(User, username=username)
     queryset = Post.objects.filter(author=user)
     post_count = queryset.count()
@@ -56,21 +56,21 @@ def user_page(request, username):
     paginator = Paginator(queryset, 4)
     page_number = request.GET.get('page')
     posts = paginator.get_page(page_number)
-
+    
     
     user_rank = get_object_or_404(UserRank, user=user)
-    
-
-    def capitalize(username):
-        return username[0].upper() + username[1:]
-
-    if username[0].islower():
-        username = capitalize(username)        
+    user_form = UserRankForm(instance=user_rank)
 
     return render(
         request,
         "blog/user_page.html",
-        {"username": username,"posts": posts, "user_rank": user_rank, "post_count": post_count,},
+        {
+            "username": username,
+            "posts": posts,
+            "user_rank": user_rank,
+            "post_count": post_count,
+            "user_form": user_form,
+        },
     )
 
 
@@ -98,7 +98,7 @@ def write_post(request):
                 print(user_rank.wafflescore)
 
                 return redirect('user_page', username=request.user)
-    
+
     post_form = PostForm()
     
     return render(
@@ -174,3 +174,44 @@ def edit_post(request, post_id, slug):
         "blog/view_full_post.html",
         {'edit_form': edit_form, 'post': post}
     )
+
+
+def edit_user(request, username):
+    """
+    View to edit the users details
+    """
+
+    user = get_object_or_404(User, username=username)
+    user_rank = get_object_or_404(UserRank, user=user)
+
+    if request.method == "POST":
+        user_form = UserRankForm(request.POST, instance=user_rank)
+        if user_form.is_valid:
+            user_rank = user_form.save()
+            messages.add_message(request, messages.SUCCESS, 'Details Updated!')
+            
+            return redirect('user_page', username=username)
+
+        else:
+            print("Form errors:", user_form.errors)
+            messages.add_message(request, messages.ERROR, 'Error updating post!')
+
+    else:
+        user_form = UserRankForm(instance=user)
+
+    posts = Post.objects.filter(author=user)
+    user_rank = get_object_or_404(UserRank, user=user)
+    post_count = posts.count()
+
+
+    return render(
+            request,
+            "blog/user_page.html",
+            {
+                "username": username,
+                "posts": posts,
+                "user_rank": user_rank,
+                "post_count": post_count,
+                "user_form": user_form
+            },
+        )
