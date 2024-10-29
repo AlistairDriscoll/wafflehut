@@ -20,12 +20,14 @@ Extra personalised styling that writes over the bootstrap styles
 }
 
 .red-hover:hover {
-    color: #fa1907;
+    color: #fa1907 !important;
 }
 
 h1 {
     text-align: center;
 }
+
+/* Styles for each post */
 
 .post-container {
     display: flex;
@@ -66,8 +68,8 @@ h1 {
     color: white;
 }
 
-.post button,
-a.button {
+a .full-post-button,
+.btn {
     margin: 4px;
     margin-top: 10px;
     padding: 10px;
@@ -75,15 +77,12 @@ a.button {
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
-}
-
-.delete-button {
-    background-color: red; /* Red for delete button */
-    color: white;
-}
-
-.edit-button,
-.full-post-button {
-    background-color: lightblue; /* Light blue for other buttons */
+    background-color: lightblue;
     color: black;
 }
+
+.delete-btn {
+    background-color: red; /* Red for delete button */
+    color: black;
+}
+
