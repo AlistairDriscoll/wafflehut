@@ -56,8 +56,8 @@ def user_page(request, username):
     paginator = Paginator(queryset, 4)
     page_number = request.GET.get('page')
     posts = paginator.get_page(page_number)
-    
-    
+
+
     user_rank = get_object_or_404(UserRank, user=user)
     user_form = UserRankForm(instance=user_rank)
 
@@ -95,7 +95,6 @@ def write_post(request):
                 user_rank = get_object_or_404(UserRank, user=request.user)
                 user_rank.wafflescore += 1
                 user_rank.save()
-                print(user_rank.wafflescore)
 
                 return redirect('user_page', username=request.user)
 
@@ -113,17 +112,31 @@ def view_full_post(request, slug):
     View to display a full blog post
     """
 
+    post = get_object_or_404(Post, slug=slug)
+
+
     def capitalize(title):
         return title[0].upper() + title[1:]
 
-    post = get_object_or_404(Post, slug=slug)
     post.title = capitalize(post.title)
-    form = EditForm(instance=post)
+
+
+
+
+    edit_form = EditForm(instance=post)
+    comment_form = CommentForm()
+    comments = post.comments.all()
+
 
     return render(
         request,
         "blog/view_full_post.html",
-        {"post": post, "edit_form": form},
+        {
+            "post": post,
+            "edit_form": edit_form,
+            "comment_form": comment_form,
+            "comments": comments,
+        },
     )
 
 
@@ -215,3 +228,4 @@ def edit_user(request, username):
                 "user_form": user_form
             },
         )
+

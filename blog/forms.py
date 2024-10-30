@@ -1,4 +1,4 @@
-from .models import Post, UserRank, Comment
+from .models import Post, UserRank
 from django import forms
 
 
@@ -18,9 +18,3 @@ class UserRankForm(forms.ModelForm):
     class Meta:
         model = UserRank
         fields = ('full_name', 'bio')
-
-
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        fields = ('body',)

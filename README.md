@@ -1,4 +1,4 @@
-+
+
 # Wafflehut
 
 This app was developed by [Alistair Driscoll](https://github.com/AlistairDriscoll)
@@ -35,3 +35,9 @@ For an in-depth look into the features, please refer to the [FEATURES.md](FEATUR
 ## Deployment
 
 To find out about deployment, refer to the [DEPLOYMENT.md](DEPLOYMENT.md) file.
+
+## Future Improvements
+
+Too see any future improvements, click [here.](FutureImprovements.md)
+
+
