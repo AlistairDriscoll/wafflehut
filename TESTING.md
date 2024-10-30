@@ -15,15 +15,26 @@
 | 2           | Click logout confirmation button | User logged out, directed to home page | Y |          |
 | 3           | Press login button | Redirects user to login page | Y |          |
 | 4           | Type in login details | Redirects user to their user page | Y |          |
-| 11          | Click Remember Me checkbox | Remembers user | Y |          |
-| 12          | Click on Log In button | Redirects user to blank In page | Y |          |
-| 13          | Click logout button | Redirects user to home page | Y |          |
-| 14          | Click browser back button | You are still logged out | Y |          |
-| 15          | Click on Log In button | Redirection to Log In page prefilled | Y |          |
+| 5           | Click Remember Me checkbox | Remembers user | Y |          |
+| 6           | Click browser back button | You are still logged out | Y |          |
+| 7           | Click on Log In button | Redirection to Log In page prefilled | Y |          |
 | Navigation  |                        |                  |      |             |
 | 1           | Click on the logo | Redirection to home page | Y |          |
-| 2           | Click Store | Redirection to Store page | Y |          |
-| 3           | Click wishlist button | Redirection to wishlist page | Y |          |
-| 4           | Click bag button | Redirection to bag page | Y |          |
-| 5           | Click Profile button | Redirection to Profile page | Y |          |
-| 6           | Click Logout button | Redirection to logout page | Y |          |
+| 2           | Click User Page button | Redirection to user page | Y |          |
+| 4           | Click 'View full post' link | Redirection to full post page | Y |          |
+| 5           | Click 'Write some waffle' link | Redirection to write post page | Y |          |
+| User Page   |                        |                  |      |             |
+| 1           | Go onto page | Users UserRank info displayed along with posts | Y |          |
+| 2           | Click 'Update information' button | Modal appears with update user form | Y |          |
+| 3           | Fill out update user form and send | User Info updates and displays | Y |          |
+| 4           | Press delete account button | Confirm delete modal shows | Y |          |
+| 5           | Press modal delete account button | Deletes account  | Y |          |
+| 6           | Goes on a different users page | Displays the same content except without buttons to create edit or delete  | Y |          |
+| Full post page |                        |                  |      |             |
+| 1           | Click edit button | Modal with edit post form appears prepopulated with the post content | Y |          |
+| 2           | Click delete button | Modal with delete functionality appears | Y |          |
+| 3           | Other users apart from the authenticated post author see the page | Full post still shows but without delete or edit buttons | Y |          |
+| Wafflescore |                        |                  |      |             |
+| 1           | User creates an account | UserRank instance made with wafflescore set to zero | Y |             |
+| 2           | User uploads post | Wafflescore goes up a point | Y |             |
+| 3           | User deletes post | Wafflescore goes down a point | Y |             |
