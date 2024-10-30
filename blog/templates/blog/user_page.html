@@ -1,6 +1,7 @@
 {% extends "base.html" %} {% block content %}
 {% load crispy_forms_tags %}
 
+
 <!-- Displays the username at the top with a border beneath -->
 <div class="container-fluid">
   <div class="row">
@@ -43,6 +44,9 @@
         >
         Update your information
       </button>
+
+      <button type="button" class="btn btn-warning" id="deleteUser">Delete your account</button>
+
       {% endif %}
     </div>
 
@@ -51,6 +55,7 @@
     {% if post_count == 0 %}
     <div class="col-12 col-md-9">
       <h3>{{ username }} is Yet to Waffle.</h3>
+      <a href="{% url 'write_post' %}" class="btn btn-large">Write some waffle</a>
     </div>
     {% else %}
     <div class="col-12 col-md-9 post-container">
@@ -116,6 +121,30 @@
           <button type="submit" class="btn">Submit</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Deletion Modal, taken and modified from bootstraps documentation -->
+
+<div class="modal" tabindex="-1" role="dialog" id="deleteAccountModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Are you sure you want to delete your account?</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p>You, your and all your posts will be permanently wiped from the database</p>
+      </div>
+      <div class="modal-footer">
+        <a href="{% url 'delete_account' %}" method="post" id="confirmDelete">
+          <button type="button" class="btn btn-warning">Delete</button>
+        </a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

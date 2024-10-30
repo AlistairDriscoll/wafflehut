@@ -43,3 +43,18 @@ updateUserButton.addEventListener("click", (e) => {
 
     updateUserModal.show();
 })
+
+
+/**
+ * Functionality to show the delete account modal
+ */
+
+let showDeleteUser = document.getElementById("deleteUser");
+
+
+showDeleteUser.addEventListener("click", (e) => {
+    let deleteAccountModal = new bootstrap.Modal(document.getElementById("deleteAccountModal"));
+    deleteAccountModal.show()
+})
+
+

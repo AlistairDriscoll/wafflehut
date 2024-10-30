@@ -74,6 +74,17 @@ def user_page(request, username):
     )
 
 
+def delete_account(request):
+    """
+    View to delete user
+    """
+
+    if request.user.is_authenticated:
+        user = request.user
+        user.delete()
+        return redirect('index')
+
+
 def write_post(request):
     """
     View for taking the PostForm data and storing it in the database
@@ -89,6 +100,8 @@ def write_post(request):
             if post_form.is_valid():
                 instance = post_form.save(commit=False)
                 instance.author = User.objects.get(username=request.user.username)
+                if instance.content == "":
+                    instance.content = instance.author + " has refused to elaborate their waffle."
                 instance.save()
                 messages.add_message(request, messages.SUCCESS, 'Post Uploaded Succesfully!!')
                 
@@ -119,13 +132,7 @@ def view_full_post(request, slug):
         return title[0].upper() + title[1:]
 
     post.title = capitalize(post.title)
-
-
-
-
     edit_form = EditForm(instance=post)
-    comment_form = CommentForm()
-    comments = post.comments.all()
 
 
     return render(
@@ -134,8 +141,6 @@ def view_full_post(request, slug):
         {
             "post": post,
             "edit_form": edit_form,
-            "comment_form": comment_form,
-            "comments": comments,
         },
     )
 
