@@ -11,21 +11,10 @@
 | 4           | Enter a username, input a valid password twice and press sign-up button | Takes user to their new userpage | Y |          |
 | 5           | Enter valid email | Field will only accept email address format, declines when email is already used | Y |          |
 | Sign In/Out |                        |                  |      |             |
-| 9           | Go to logout | Takes user to a confirm delete page | Y |          |
-| 10          | Click logout confirmation button | User logged out, directed to home page | Y |          |
-| 7           | Press login button | Redirects user to login page | Y |          |
-| 7           | Type in login details | Redirects user to their user page | Y |          |
-
-| 1           | Click on Log In button | Redirection to Log In page | Y |          |
-| 2           | Click on the Sign Up link in the form | Redirection to Sign Up page | Y |          |
-
-| 4           | Enter valid password | Field will only accept password format | Y |          |
-| 5           | Click on Log In button | Redirects user to blank In page | Y |          |
-| 6           | click logout button | Redirects user to home page | Y |          |
-| 7           | Click browser back button | You are still logged out | Y |          |
-| 8           | Click on Log In button | Redirection to Log In page | Y |          |
-| 9           | Enter valid email | Field will only accept email address format | Y |          |
-| 10          | Enter valid password | Field will only accept password format | Y |          |
+| 1           | Go to logout | Takes user to a confirm logout page | Y |          |
+| 2           | Click logout confirmation button | User logged out, directed to home page | Y |          |
+| 3           | Press login button | Redirects user to login page | Y |          |
+| 4           | Type in login details | Redirects user to their user page | Y |          |
 | 11          | Click Remember Me checkbox | Remembers user | Y |          |
 | 12          | Click on Log In button | Redirects user to blank In page | Y |          |
 | 13          | Click logout button | Redirects user to home page | Y |          |

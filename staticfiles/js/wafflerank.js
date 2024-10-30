@@ -8,8 +8,6 @@ let wafflerankHeader = document.getElementById('wafflerankHeader');
 let userScore = wafflerankHeader.getAttribute('user_score');
 let waffleRank = "";
 
-console.log(userScore)
-
 if (userScore == 0) {
     waffleRank = "Yet to waffle!";
 } else if (userScore >= 30) {
@@ -23,3 +21,40 @@ if (userScore == 0) {
 } 
 
 wafflerankHeader.innerText = "User Rank: " + waffleRank;
+
+
+/**
+ * Functionality for updateUserDetails modal and form within
+ * adds event listener to button to show the modal
+ */
+
+let updateUserButton = document.getElementById("updateUser");
+let updateUserModal = new bootstrap.Modal(document.getElementById("updateUserModal"));
+let userForm = document.getElementById("userForm")
+
+updateUserButton.addEventListener("click", (e) => {
+    let fullName = e.target.getAttribute("full_name");
+    let userBio = e.target.getAttribute("user_bio");
+    let fullNameInput = document.getElementById("id_full_name");
+    let bioInput = document.getElementById("id_bio");
+
+    fullNameInput.innerText = fullName;
+    bioInput.innerText = userBio;
+
+    updateUserModal.show();
+})
+
+
+/**
+ * Functionality to show the delete account modal
+ */
+
+let showDeleteUser = document.getElementById("deleteUser");
+
+
+showDeleteUser.addEventListener("click", (e) => {
+    let deleteAccountModal = new bootstrap.Modal(document.getElementById("deleteAccountModal"));
+    deleteAccountModal.show()
+})
+
+
