@@ -61,19 +61,17 @@
     <div class="col-12 col-md-9 post-container">
       <h3>{{ username }}'s Posts</h3>
       <div class="row">
-        <ul>
           {% for post in posts %}
           <div class="post col-lg-6 col-12 m-2">
             <h2>{{ post.title }}</h2>
             <div class="author">Written by {{ post.author }}</div>
             <div class="created_on">Created on: {{ post.created_on|date:"F j, Y" }}</div>
-            <div class="content">{{ post.content|safe }}</div>
+            <div class="post-content" data-post-content="{{ post.content }}">{{ post.content|truncatechars:30 }}</div>
             {% if post_count > 0 %}
             <a class="full-post-button" href="{% url 'view_full_post' slug=post.slug %}">See Full
               Post</a>
             {% endif %}
           </div>
-        </ul>
         {% endfor %}
       </div>
     </div>
