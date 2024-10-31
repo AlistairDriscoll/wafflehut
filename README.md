@@ -5,9 +5,11 @@ This app was developed by [Alistair Driscoll](https://github.com/AlistairDriscol
 
 The full repository can be found [here](https://github.com/AlistairDriscoll/wafflehut)
 
+![Wafflehut logo](documentation/basic-structure/logo-mini.jpg)
+
 ## About
 
-Wafflehut is a Reddit-style website that is all about people sharing their opinions, but with a sort of twist. Wafflehut is designed to be an environment where people can share and talk about their maybe more controversial opinions on things, and others can both comment, or use one of various reactions to express if they agree or disagree. I chose the name Wafflehut from an English slang word 'waffle'. If someone is talking nonsense then they might be told that they are 'talking absolute waffle' or that they are 'waffling on a bit'. In using this in the name of the website users can hopefully understand that you can say things in jest and banter with users for whatever they say also, hopefully adding a sense of camaraderie and jest to the user experience that one does not normally see on other sites.
+Wafflehut is a Reddit-style website that is all about people sharing their opinions, but with a sort of twist. Wafflehut is designed to be an environment where people can share and talk about their maybe more controversial opinions on things. I chose the name Wafflehut from an English slang word 'waffle'. If someone is talking nonsense then they might be told that they are 'talking absolute waffle' or that they are 'waffling on a bit'. In using this in the name of the website users can hopefully understand that they are in an environment where they can talk about stuff they normally don't talk about, but in a jesty kind of way, hopefully adding a sense of camaraderie and banter to the user experience that one does not normally see on other sites.
 
 ## User-Stories
 
@@ -24,9 +26,14 @@ Wafflehut is a Reddit-style website that is all about people sharing their opini
 | Issue ID    | User Story |
 |-------------|-------------|
 |[#4](https://github.com/AlistairDriscoll/wafflehut/issues/4)| As a regular/registered user I can create, update and delete posts so that I can share my opinions on the website for others to see|
-|[#5](https://github.com/AlistairDriscoll/wafflehut/issues/5)| As a regular/registered user I can comment on mine and others posts so that I can let them know my opinion on their posts and discuss more with people who have commented on mine|
-|[#6](https://github.com/AlistairDriscoll/wafflehut/issues/6)| As a regular/registered user I can press one of the reactions so that the person who posted knows what people think about it|
 |[#7](https://github.com/AlistairDriscoll/wafflehut/issues/7)| As a regular/registered user I can delete my account so that no one can see my posts, comments or reactions anymore if I want to come off the site|
+
+## The Database
+
+The database is based on the Django provided User model, the UserRank model and the Post model.
+The UserRank model is created via the signals.py code whenever a user is made, originally designed to just be a score tally I thought to also add functionality for the user to be able to say more about themself. The Post model has a many to one relationship with the User as the user will be able to post many different posts but each of them only addigned to the one user.
+
+![ER Diagram](documentation/basic-structure/edr-mini.jpg)
 
 ## Features
 
