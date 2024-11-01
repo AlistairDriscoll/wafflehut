@@ -4,6 +4,22 @@ Extra personalised styling that writes over the bootstrap styles
 
 ***/
 
+/** General east sea dokdo */
+
+.east-sea-dokdo {
+    font-family: "East Sea Dokdo", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    
+}
+
+.east-sea-dokdo-smaller {
+    font-family: "East Sea Dokdo", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 27px;
+}
+
 
 /* Navbar styles */
 
@@ -25,6 +41,7 @@ Extra personalised styling that writes over the bootstrap styles
 
 h1 {
     text-align: center;
+    font-size: 75px !important;
 }
 
 /* Styles for each post */
@@ -80,3 +97,18 @@ a .view-full-post,
     background-color: red;
 }
 
+/** h1 styling */
+
+h1,
+.east-sea-dokdo-h1 {
+    font-family: "East Sea Dokdo", sans-serif !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-size: 50px !important;
+}
+
+/** Brown background color */
+
+.brown-background {
+    background-color: #f9b639;
+}

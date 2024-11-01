@@ -37,7 +37,7 @@ The UserRank model is created via the signals.py code whenever a user is made, o
 
 ## Features
 
-For an in-depth look into the features, please refer to the [FEATURES.md](FEATURES.md) file.
+For an in-depth look into the wireframes and features, please refer to the [FEATURES.md](FEATURES.md) file.
 
 ## Deployment
 

@@ -19,20 +19,17 @@
 <!-- User Rank Information -->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12 col-md-3 border-right border-md-3">
+    <div class="col-12 col-md-3 border-right border-md-3 brown-background">
       <h2 id="wafflerankHeader" user_score="{{ user_rank.wafflescore }}"></h2>
       <p>
-        Full Name: {% if user_rank.full_name == "" %} {{ username }} Has not put
-        their full name {% else %}{{ user_rank.full_name }}{% endif %}
+        Full Name: <span class="east-sea-dokdo-smaller">{% if user_rank.full_name == "" %} {{ username }} Has not put
+          their full name {% else %}{{ user_rank.full_name }}{% endif %}</span> 
       </p>
 
-      {% if user_rank.bio == "" %}
-      <p>No user bio for this page</p>
-      {% else %}
-      <p>Bio: {{ user_rank.bio }}</p>
-      {% endif %}
+      
+      <p>Bio: <span class="east-sea-dokdo-smaller">{% if user_rank.bio == "" %}No user bio for this page{% else %}{{ user_rank.bio }}{% endif %}</span></p>
 
-      <p>{{ username }} started waffling on: {{ user_rank.dof }}</p>
+      <p>{{ username }} started waffling on: <span class="east-sea-dokdo-smaller">{{ user_rank.dof }}</span></p>
 
       {% if user.is_authenticated and user.username == username %}
       <button
@@ -66,7 +63,7 @@
             <h2>{{ post.title }}</h2>
             <div class="author">Written by {{ post.author }}</div>
             <div class="created_on">Created on: {{ post.created_on|date:"F j, Y" }}</div>
-            <div class="post-content">{{ post.content|truncatechars:30 }}</div>
+            <div class="post-content">{{ post.content|truncatechars:50 }}</div>
             {% if post_count > 0 %}
             <a class="btn view-full-post" href="{% url 'view_full_post' slug=post.slug %}">See Full
               Post</a>

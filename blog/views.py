@@ -23,8 +23,6 @@ def Index(request):
 
         post_list = []
         for p in posts:
-            if len(p.content) >= 30:
-                p.content = p.content[:30] + '...'
             post_list.append(p)
         
         if len(post_list) >= 4:
@@ -101,7 +99,7 @@ def write_post(request):
                 instance = post_form.save(commit=False)
                 instance.author = User.objects.get(username=request.user.username)
                 if instance.content == "":
-                    instance.content = instance.author + " has refused to elaborate their waffle."
+                    instance.content = f"{instance.author.username} has refused to elaborate their waffle."
                 instance.save()
                 messages.add_message(request, messages.SUCCESS, 'Post Uploaded Succesfully!!')
                 
@@ -110,6 +108,11 @@ def write_post(request):
                 user_rank.save()
 
                 return redirect('user_page', username=request.user)
+        else:
+            messages.add_message(request, messages.ERROR, 'You can only delete your own posts!')
+
+            return render('index')
+
 
     post_form = PostForm()
     

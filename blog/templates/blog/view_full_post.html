@@ -1,28 +1,42 @@
 {% extends "base.html" %} {% block content %}
 {% load crispy_forms_tags %}
 
-<div class="row justify-content-center">
-  <div class="col-lg-8">
-    <h1>{{ post.title }}</h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 d-flex flex-column justify-content-between align-items-center">
+      <h1 class="east-sea-dokdo-h1">{{ post.title }}</h1>
 
-    <h2>By: {{ post.author }}</h2>
+      <div>
+        {{ post.content }}
+      </div>
 
-    {{ post.content }} {{ post.created_on }}
+      <div>
+        {{ post.created_on }}
+      </div>
 
-    {% if user.is_authenticated and user == post.author %}
+      <div>
+        By: {{ post.author }}
+      </div>
 
-    <button type="button" class="btn" post_id="{{ post.id }}" post_slug="{{ post.slug }}"
-      post_content="{{ post.content }}" post_title="{{ post.title }}">
-      Edit
-    </button>
+      {% if user.is_authenticated and user == post.author %}
+
+      <div class="align-self-end mt-auto">
+        <button type="button" class="btn" post_id="{{ post.id }}" post_slug="{{ post.slug }}"
+          post_content="{{ post.content }}" post_title="{{ post.title }}">
+          Edit
+        </button>
 
 
-    <button type="button" class="btn delete-btn-hover" post_id="{{ post.id }}" post_slug="{{ post.slug }}">
-      Delete
-    </button>
-    {% endif %}
+        <button type="button" class="btn delete-btn-hover" post_id="{{ post.id }}" post_slug="{{ post.slug }}">
+          Delete
+        </button>
+      </div>
+
+      {% endif %}
+    </div>
   </div>
 </div>
+
 
 
 
