@@ -22,7 +22,7 @@
     <div class="col-12 col-md-3 border-right border-md-3">
       <h2 id="wafflerankHeader" user_score="{{ user_rank.wafflescore }}"></h2>
       <p>
-        Full Name:{% if user_rank.full_name == "" %} {{ username }} Has not put
+        Full Name: {% if user_rank.full_name == "" %} {{ username }} Has not put
         their full name {% else %}{{ user_rank.full_name }}{% endif %}
       </p>
 
@@ -45,7 +45,7 @@
         Update your information
       </button>
 
-      <button type="button" class="btn btn-warning" id="deleteUser">Delete your account</button>
+      <button type="button" class="btn delete-btn-hover" id="deleteUser">Delete your account</button>
 
       {% endif %}
     </div>
@@ -58,17 +58,17 @@
       <a href="{% url 'write_post' %}" class="btn btn-large">Write some waffle</a>
     </div>
     {% else %}
-    <div class="col-12 col-md-9 post-container">
+    <div class="col-12 col-md-9">
       <h3>{{ username }}'s Posts</h3>
-      <div class="row">
+      <div class="row justify-content-around">
           {% for post in posts %}
-          <div class="post col-lg-6 col-12 m-2">
+          <div class="post col-lg-5 col-12 m-2">
             <h2>{{ post.title }}</h2>
             <div class="author">Written by {{ post.author }}</div>
             <div class="created_on">Created on: {{ post.created_on|date:"F j, Y" }}</div>
-            <div class="post-content" data-post-content="{{ post.content }}">{{ post.content|truncatechars:30 }}</div>
+            <div class="post-content">{{ post.content|truncatechars:30 }}</div>
             {% if post_count > 0 %}
-            <a class="full-post-button" href="{% url 'view_full_post' slug=post.slug %}">See Full
+            <a class="btn view-full-post" href="{% url 'view_full_post' slug=post.slug %}">See Full
               Post</a>
             {% endif %}
           </div>

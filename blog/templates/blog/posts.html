@@ -3,22 +3,20 @@
 
 
 <h1>Some Hot Waffle:</h1>
-<div class="post-container">
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-around">
             {% for post in posts %}
-            <div class="post col-lg-6 col-12 mb-4">
+            <div class="post col-lg-5 col-12 mb-4">
                 <h2>{{ post.title }}</h2>
                 <div class="author">Written by {{ post.author }}</div>
                 <div class="created_on">Created on: {{ post.created_on|date:"F j, Y" }}</div>
-                <div class="post-content" data-post-content="{{ post.content }}">{{ post.content|safe }}</div>
-                <a class="full-post-button" href="{% url 'view_full_post' post.slug %}">See Full Post</a>
+                <div class="post-content">{{ post.content|safe }}</div>
+                <a class="btn full-post-button" href="{% url 'view_full_post' post.slug %}">See Full Post</a>
                 <a href="{% url 'user_page' post.author %}"><button type="button" class="btn" post_id="{{ post.id }}" post_slug="{{ post.slug }}">Go to {{ post.author }}'s Profile</button></a>
             </div>
             {% endfor %}
         </div>
     </div>
-</div>
 
 
 
