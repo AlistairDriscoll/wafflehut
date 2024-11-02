@@ -68,3 +68,32 @@ In terms of mistakes, I kept on accidentally keeping the debug set to true when 
 - FontAwesome: special appreciation for the website that provided over 6000 different waffle icons to choose from!
 - Jquery in order to work javascript
 
+## Compatibility
+
+Here is the website displaying in Edge, Chrome and firefox.
+
+![Edge screenshot](documentation/finished-content/edge-screenshot.jpg)
+![Chrome screenshot](documentation/finished-content/chrome-screenshot.jpg)
+![Firefox screenshot](documentation/finished-content/firefox-screenshot.jpg)
+
+## Lighthouse
+
+For the home page:
+![Index lighthouse screenshot](documentation/finished-content/lighthouse.jpg)
+
+For the userpage:
+![Userpage lighthouse](documentation/finished-content/lighthouse-userpage.jpg)
+
+For a view_full_post page:
+![Post page lighthouse](documentation/finished-content/lighthouse-userpage.jpg)
+
+Sign in page:
+![Sign in lighthouse](documentation/finished-content/sign-in-lighthouse.jpg)
+
+Sign out page:
+![Sign-out lighthouse](documentation/finished-content/sign-out-lighthouse.jpg)
+
+Sign-up page
+![Sign-up lighthouse](documentation/finished-content/sign-up-lighthouse.jpg)
+
+
