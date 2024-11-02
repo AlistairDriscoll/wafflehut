@@ -22,12 +22,12 @@
 
       <div class="align-self-end mt-auto">
         <button type="button" class="btn" id="edit-post-btn" data-post_id="{{ post.id }}" data-post_slug="{{ post.slug }}"
-          post_content="{{ post.content }}" post_title="{{ post.title }}">
+          data-post-content="{{ post.content }}" data-post-title="{{ post.title }}">
           Edit
         </button>
 
 
-        <button type="button" class="btn delete-btn-hover" id="delete-post-btn" post_id="{{ post.id }}" post_slug="{{ post.slug }}">
+        <button type="button" class="btn delete-btn-hover" id="delete-post-btn" post_id="{{ post.id }}" data-post-slug="{{ post.slug }}">
           Delete
         </button>
       </div>

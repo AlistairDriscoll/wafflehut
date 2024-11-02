@@ -37,7 +37,7 @@ deletePostButton.addEventListener('click', (e) => {
 
 editButton.addEventListener('click', (e) => {
     let title = document.getElementById("modalTitle");
-    let titleContent = e.target.getAttribute("post_title");
+    let titleContent = e.target.getAttribute("data-post-title");
     title.innerText = titleContent;
     editModal.show();
 });
