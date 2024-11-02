@@ -1,9 +1,9 @@
 /* jshint esversion: 6 */
 
 const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
-const deletePostButtons = document.getElementsByClassName("delete-post-btn");
+const deletePostButton = document.getElementById("delete-post-btn");
 const confirmDelete = document.getElementById("confirmDelete");
-const editButtons = document.getElementsByClassName("edit-button");
+const editButton = document.getElementById("edit-post-btn");
 const editModal = new bootstrap.Modal(document.getElementById("editModal"));
 
 
@@ -19,13 +19,13 @@ const editModal = new bootstrap.Modal(document.getElementById("editModal"));
 * - Taken from Code Institute's 'I think therfore I blog' module
 */
 
-for (let button of deletePostButtons) {
-    button.addEventListener('click', (e) => {
-        let postId = e.target.getAttribute("post_id");
-        confirmDelete.href = `delete_post/${postId}`;
-        deleteModal.show();
-    });
-}
+
+deletePostButton.addEventListener('click', (e) => {
+    let postId = e.target.getAttribute("post_id");
+    confirmDelete.href = `delete_post/${postId}`;
+    deleteModal.show();
+});
+
 
 /**
  * Edit post functionality
@@ -34,14 +34,14 @@ for (let button of deletePostButtons) {
  * Then shows the editModal
  */
 
-for (let button of editButtons) {
-    button.addEventListener('click', (e) => {
-        let title = document.getElementById("modalTitle");
-        let titleContent = e.target.getAttribute("post_title");
-        title.innerText = titleContent;
-        editModal.show();
-    });
-}
+
+editButton.addEventListener('click', (e) => {
+    let title = document.getElementById("modalTitle");
+    let titleContent = e.target.getAttribute("post_title");
+    title.innerText = titleContent;
+    editModal.show();
+});
+
 
 /**
  * Function to display the users wafflerank

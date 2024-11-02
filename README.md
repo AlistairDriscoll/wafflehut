@@ -47,7 +47,24 @@ To find out about deployment, refer to the [DEPLOYMENT.md](DEPLOYMENT.md) file.
 
 Too see any future improvements, click [here.](FutureImprovements.md)
 
-## Mistakes + Mishaps
+## Mistakes
 
 In terms of mistakes, I kept on accidentally keeping the debug set to true when I committed the code to github. Another would be the fact that I wrote some of the IDs of elements in camel case instead of kebab case as is standard convention. I did this as I got used to seeing bootstrap name their IDs with camel case so presumed to do the same.
+
+## Technologies Used
+
+- Django: Version 4.2.5
+- Django Crispy Forms
+- Django Allauth
+- Django Summernote
+- Bootstrap
+- Whitenoise
+- CSS
+- Javascript
+- HTML
+- Python: Version 3.2
+- Heroku
+- GitHub
+- FontAwesome: special appreciation for the website that provided over 6000 different waffle icons to choose from!
+- Jquery in order to work javascript
 

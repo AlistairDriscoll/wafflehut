@@ -6,11 +6,11 @@
     <div class="col-lg-8 d-flex flex-column justify-content-between align-items-center">
       <h1 class="east-sea-dokdo-h1">{{ post.title }}</h1>
 
-      <div class="content-bigger">
+      <div class="brown-background content-bigger">
         {{ post.content }}
       </div>
 
-      <div>
+      <div class="created_on">
         {{ post.created_on }}
       </div>
 
@@ -21,13 +21,13 @@
       {% if user.is_authenticated and user == post.author %}
 
       <div class="align-self-end mt-auto">
-        <button type="button" class="btn" post_id="{{ post.id }}" post_slug="{{ post.slug }}"
+        <button type="button" class="btn" id="edit-post-btn" data-post_id="{{ post.id }}" data-post_slug="{{ post.slug }}"
           post_content="{{ post.content }}" post_title="{{ post.title }}">
           Edit
         </button>
 
 
-        <button type="button" class="btn delete-btn-hover" post_id="{{ post.id }}" post_slug="{{ post.slug }}">
+        <button type="button" class="btn delete-btn-hover" id="delete-post-btn" post_id="{{ post.id }}" post_slug="{{ post.slug }}">
           Delete
         </button>
       </div>

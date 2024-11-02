@@ -3,16 +3,24 @@
 {% load crispy_forms_tags %}
 
 {% if user.is_authenticated %}
-<h1>Write Some Waffle Here!</h1>
 
-<form id="postForm" method="post">
-    {{ post_form | crispy }}
-    {% csrf_token %}
-    <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
-</form>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h1>Write Some Waffle Here!</h1>
+
+            <form id="postForm" method="post">
+                {{ post_form | crispy }}
+                {% csrf_token %}
+                <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 {% else %}
-<h1>Log in to leave a comment</h1>
+<h1>Log in to write a post</h1>
 {% endif %}
 
 {% endblock %}
