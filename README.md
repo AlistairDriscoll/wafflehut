@@ -99,4 +99,11 @@ Sign-up page
 
 ## Validation
 
-Validation can be seen here in the ![VALIDATION.md]()
+Validation can be seen here in the ![VALIDATION.md file.](VALIDATION.md)
+
+## Responsivity
+
+![Big screen responsivity](documentation/finished-content/resp-full-screen.jpg)
+![Medium screen responsivity](documentation/finished-content/resp-midsize.jpg)
+![Small screen responsivity](documentation/finished-content/resp-smllscrn.jpg)
+

@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['8000-alistairdrisc-wafflehut-jh11xkdolln.ws.codeinstitute-ide.
                 '.herokuapp.com',
                 '8001-alistairdrisc-wafflehut-jh11xkdolln.ws.codeinstitute-ide.net',
                 '8002-alistairdrisc-wafflehut-jh11xkdolln.ws.codeinstitute-ide.net',
+                '8003-alistairdrisc-wafflehut-jh11xkdolln.ws.codeinstitute-ide.net',
                 '127.0.0.1']
 
 
