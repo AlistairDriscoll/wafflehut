@@ -2,9 +2,13 @@
 
 In my website designs I had thought to make the website have a main home page dispaying posts for both registered users and non-registered users. Registered users then have the option to react to the posts and comment on them. Everytime the user posts or comments on a post their wafflescore will go up, which determines their waffle rank. A user also each has their own user page also available for all users to look at. This will display their waffle rank, and display their posts four to a page for desktop, moving down to only one post a page for mobile use, although the user will be able to scroll to see more. A 'could have' option is for the user to see a list of posts they have commented on previously in order to catch up with what other commenters have said in reply to them.
 
+The wireframes I have sketched out are designed to have the main page display four random wafflehut posts that could be from any account and about anything. I decided this because I thought it would complement the premise of the app in that people are there to 'waffle on' for anyone to read about and I thought that by chance if people bumped into posts where people had the same opinion as them then it would enhance the social element that the app is supposed to provide, and if they disagreed the banter element would be enhanced also. Unfortunately the current product doesn't unclude all the details that are shown in the wireframes but I have mentioned some updates in the ![Future Improvements file link](FUTUREIMPROVEMENTS.md) that will hopefully be implemented soon.
+
 ![Wafflehut flowchart wireframe](documentation/basic-structure/complete-flowchart.png)
 
-The wireframes I have sketched out are designed to have the main page display four random wafflehut posts that could be from any account and about anything. I decided this because I thought it would complement the premise of the app in that people are there to 'waffle on' for anyone to read about and I thought that by chance if people bumped into posts where people had the same opinion as them then it would enhance the social element that the app is supposed to provide, and if they disagreed the banter element would be enhanced also. These on desktops are made to be displayed all on one page and with phones are meant to show one post at a time and so the user can scroll to see the next. Whenever the user sees a post they can click on it to see the post fully as if the text area with the author's full articulated point goes beyond 50 characters then it will only show those first 50 characters in the exerpt. The full post page will also have the comment section.
+![Actual flowchart](documentation/basic-structure/flowchart.jpg)
+
+An example of this is the above, as it has been stripped down a bit with the bottom picture being the end product flowchart.
 
 ### Homepage Wireframes
 

@@ -6,7 +6,7 @@
     <div class="col-lg-8 d-flex flex-column justify-content-between align-items-center">
       <h1 class="east-sea-dokdo-h1">{{ post.title }}</h1>
 
-      <div>
+      <div class="content-bigger">
         {{ post.content }}
       </div>
 
@@ -32,6 +32,8 @@
         </button>
       </div>
 
+      {% else %}
+      <a href="{% url 'user_page' post.author %}"><button type="button" class="btn m-1"">Go to {{ post.author }}'s Profile</button></a>
       {% endif %}
     </div>
   </div>

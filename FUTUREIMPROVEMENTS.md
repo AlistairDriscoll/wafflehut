@@ -115,3 +115,5 @@ The posting functionality for the Comment form would be within the 'view_full_po
 
                 return redirect('view_full_post', slug=slug,)
 ```
+
+Lastly, another 'could have' I would like to impletement in the future would be functionality so users have a page that displays the posts they have reacted to or commented on before in order to go back to and see what others have said/reacted.
