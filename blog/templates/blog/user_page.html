@@ -20,7 +20,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-md-3 border-right border-md-3 brown-background">
-      <h2 id="wafflerankHeader" user_score="{{ user_rank.wafflescore }}"></h2>
+      <p data-user_score="{{ user_rank.wafflescore }}" id="wafflerankHeader"></p>
       <p>
         Full Name: <span class="east-sea-dokdo-smaller">{% if user_rank.full_name == "" %} {{ username }} Has not put
           their full name {% else %}{{ user_rank.full_name }}{% endif %}</span> 

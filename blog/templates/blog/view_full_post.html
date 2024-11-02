@@ -33,7 +33,7 @@
       </div>
 
       {% else %}
-      <a href="{% url 'user_page' post.author %}"><button type="button" class="btn m-1"">Go to {{ post.author }}'s Profile</button></a>
+      <a href="{% url 'user_page' post.author %}" class="btn m-1">Go to {{ post.author }}'s Profile</a>
       {% endif %}
     </div>
   </div>
@@ -56,8 +56,8 @@
         <p>Deleting will permanently wipe this from the database.</p>
       </div>
       <div class="modal-footer">
-        <a href="#" method="post" id="confirmDelete">
-          <button type="button" class="btn btn-warning">Delete</button>
+        <a href="#" id="confirmDelete" class="btn btn-warning">
+          Delete
         </a>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>

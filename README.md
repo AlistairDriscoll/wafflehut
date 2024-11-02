@@ -49,7 +49,7 @@ Too see any future improvements, click [here.](FutureImprovements.md)
 
 ## Mistakes
 
-In terms of mistakes, I kept on accidentally keeping the debug set to true when I committed the code to github. Another would be the fact that I wrote some of the IDs of elements in camel case instead of kebab case as is standard convention. I did this as I got used to seeing bootstrap name their IDs with camel case so presumed to do the same.
+In terms of mistakes, I kept on accidentally keeping the debug set to true when I committed the code to github. Another would be the fact that I wrote some of the IDs of elements in camel case instead of kebab case as is standard convention. I did this as I got used to seeing bootstrap name their IDs with camel case so presumed to do the same. Also there are some things wrong with the forms that django has provided such as in the sign up where there are unclosed elements but as these were provided by django I thought to keep them as I'm not sure how to change then anyway.
 
 ## Technologies Used
 
@@ -97,3 +97,6 @@ Sign-up page
 ![Sign-up lighthouse](documentation/finished-content/sign-up-lighthouse.jpg)
 
 
+## Validation
+
+Validation can be seen here in the ![VALIDATION.md]()

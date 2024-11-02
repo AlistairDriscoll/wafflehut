@@ -50,7 +50,7 @@ editButton.addEventListener('click', (e) => {
  */
 
 let wafflerankHeader = document.getElementById('wafflerankHeader');
-let userScore = wafflerankHeader.getAttribute('user_score');
+let userScore = wafflerankHeader.getAttribute('data-user_score');
 let waffleRank = "";
 
 if (userScore == 0) {
