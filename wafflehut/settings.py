@@ -13,8 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
-if os.path.isfile('env.py'):
-    import env
+if os.path.isfile("env.py"):
+    import env  # noqa
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,12 +30,11 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['8000-alistairdrisc-wafflehut-jh11xkdolln.ws.codeinstitute-ide.net',
-                '.herokuapp.com',
-                '8001-alistairdrisc-wafflehut-jh11xkdolln.ws.codeinstitute-ide.net',
-                '8002-alistairdrisc-wafflehut-jh11xkdolln.ws.codeinstitute-ide.net',
-                '8003-alistairdrisc-wafflehut-jh11xkdolln.ws.codeinstitute-ide.net',
-                '127.0.0.1']
+ALLOWED_HOSTS = ['8000-alistairdrisc-wafflehut-j'
+                 'h11xkdolln.ws.codeinstitute-ide.net',
+                 '.herokuapp.com',
+                 'localhost',
+                 '127.0.0.1',]
 
 
 # Application definition
@@ -123,16 +122,20 @@ CSRF_TRUSTED_ORIGINS = [
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password'
+        '_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password'
+        '_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password'
+        '_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password'
+        '_validation.NumericPasswordValidator',
     },
 ]
 
