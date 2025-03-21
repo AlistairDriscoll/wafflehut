@@ -1,0 +1,3 @@
+djlint==1.34.0
+black
+flake8

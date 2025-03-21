@@ -6,7 +6,6 @@
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +27,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}?v=123" rel="stylesheet">
 </head>
 
 <body>
@@ -36,7 +35,7 @@
         <a class="navbar-brand east-sea-dokdo-regular ms-4" href="{% url 'index' %}">
             <div>
                 Wafflehut!
-                <img class="max-logo-height d-none d-sm-inline" src="{% static 'images/waffle-logo.png' %}"
+                <img height="100%" width="auto" class="max-logo-height d-none d-sm-inline" src="{% static 'images/waffle-logo.png' %}"
                     alt="Wafflehut logo">
                 <span class="d-none d-lg-inline mx-auto">A Place for Pure Waffle...</span>
             </div>
