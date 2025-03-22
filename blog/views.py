@@ -15,7 +15,7 @@ from .forms import PostForm, UserRankForm, EditForm
 
 def Index(request):
     posts = Post.objects.all()
-    
+
     def get_posts(posts):
         """
         Function to return four random posts to be displayed on the home page
@@ -24,17 +24,17 @@ def Index(request):
         post_list = []
         for p in posts:
             post_list.append(p)
-        
+
         if len(post_list) >= 4:
             display_posts = random.sample(post_list, 4)
         else:
             display_posts = post_list
-        
+
         return display_posts
 
     username = request.user
     queryset = get_posts(posts)
-    
+
     return render(
         request,
         "blog/posts.html",
@@ -46,7 +46,7 @@ def user_page(request, username):
     """
     View to show a users profile
     """
-    
+
     user = get_object_or_404(User, username=username)
     queryset = Post.objects.filter(author=user)
     post_count = queryset.count()
@@ -102,7 +102,7 @@ def write_post(request):
                     instance.content = f"{instance.author.username} has refused to elaborate their waffle."
                 instance.save()
                 messages.add_message(request, messages.SUCCESS, 'Post Uploaded Succesfully!!')
-                
+
                 user_rank = get_object_or_404(UserRank, user=request.user)
                 user_rank.wafflescore += 1
                 user_rank.save()
@@ -115,7 +115,7 @@ def write_post(request):
 
 
     post_form = PostForm()
-    
+
     return render(
         request,
         "blog/write_post.html",
@@ -151,7 +151,7 @@ def view_full_post(request, slug):
 def delete_post(request, slug, post_id):
     """
     View to delete a post, the 'if' statement was taken from Code Institute and edited to suit this view
-    - Gets the post from the database 
+    - Gets the post from the database
     - Checks to see if the post author is the same as the request user
     - If so deletes the record and knocks the users wafflescore down a point before saving
     - Adds a message depending on if the user was authorised to delete
@@ -159,7 +159,7 @@ def delete_post(request, slug, post_id):
     """
 
     post = get_object_or_404(Post, slug=slug)
-    
+
     if post.author == request.user:
         post.delete()
         user_rank = get_object_or_404(UserRank, user=post.author)
@@ -210,7 +210,7 @@ def edit_user(request, username):
         if user_form.is_valid:
             user_rank = user_form.save()
             messages.add_message(request, messages.SUCCESS, 'Details Updated!')
-            
+
             return redirect('user_page', username=username)
 
         else:

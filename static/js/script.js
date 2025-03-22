@@ -9,12 +9,12 @@ const editModal = new bootstrap.Modal(document.getElementById("editModal"));
 
 /**
 * Initializes deletion functionality for the provided delete buttons.
-* 
+*
 * For each button in the `deleteButtons` collection:
 * - Retrieves the associated posts's ID upon click.
-* - Updates the `deleteConfirm` link's href to point to the 
+* - Updates the `deleteConfirm` link's href to point to the
 * deletion endpoint for the specific comment.
-* - Displays a confirmation modal (`deleteModal`) to prompt 
+* - Displays a confirmation modal (`deleteModal`) to prompt
 * the user for confirmation before deletion.
 * - Taken from Code Institute's 'I think therfore I blog' module
 */
@@ -63,7 +63,7 @@ if (userScore == 0) {
     waffleRank = "Has waffle.";
 } else if (userScore < 10) {
     waffleRank = "Entry level waffler...";
-} 
+}
 
 wafflerankHeader.innerText = "User Rank: " + waffleRank;
 
@@ -99,4 +99,13 @@ let showDeleteUser = document.getElementById("deleteUser");
 showDeleteUser.addEventListener("click", (e) => {
     let deleteAccountModal = new bootstrap.Modal(document.getElementById("deleteAccountModal"));
     deleteAccountModal.show();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        document.querySelectorAll('.alert').forEach(alert => {
+            let instance = bootstrap.Alert.getOrCreateInstance(alert);
+            instance.close();
+        });
+    }, 4000);
 });
