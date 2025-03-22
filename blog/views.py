@@ -6,12 +6,11 @@ from django.views import generic
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 
 from .models import Post, UserRank
 from .forms import PostForm, UserRankForm, EditForm
 
-
-# Create your views here.
 
 def Index(request):
     posts = Post.objects.all()
@@ -72,6 +71,7 @@ def user_page(request, username):
     )
 
 
+@login_required
 def delete_account(request):
     """
     View to delete user
@@ -172,23 +172,24 @@ def delete_post(request, slug, post_id):
     return HttpResponseRedirect(reverse('user_page', kwargs={'username': post.author.username}))
 
 
+@login_required
 def edit_post(request, post_id, slug):
-    """
-    View to edit a Post
-    """
+    post = get_object_or_404(Post, id=post_id, slug=slug)
 
-    post = get_object_or_404(Post, slug=slug)
-    edit_form = EditForm(data=request.POST, instance=post)
+    if post.author != request.user:
+        messages.warning(request, "You are not allowed to edit this post.")
+        return redirect("index")
 
     if request.method == "POST":
-
-        if edit_form.is_valid() and post.author == request.user:
-            post = edit_form.save()
-            messages.add_message(request, messages.SUCCESS, 'Post Updated!')
+        edit_form = EditForm(data=request.POST, instance=post)
+        if edit_form.is_valid():
+            edit_form.save()
+            messages.success(request, 'Post Updated!')
             return redirect('view_full_post', slug=post.slug)
-
         else:
-            messages.add_message(request, messages.ERROR, 'Error updating post!')
+            messages.error(request, 'Error updating post!')
+    else:
+        edit_form = EditForm(instance=post)
 
     return render(
         request,
