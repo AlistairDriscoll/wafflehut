@@ -94,6 +94,15 @@
                 </ul>
             </div>
         </nav>
+        {% if user.is_authenticated %}
+        <div class="container">
+            <div class="row">
+                <div class="col-12 username-nav">
+                    <h4 class="mx-auto">Currently Signed in as {{ user.username }}</h4>
+                </div>
+            </div>
+        </div>
+        {% endif %}
         <!-- displaying Django messages, taken from Code Institute -->
         <div class="container">
             <div class="row">

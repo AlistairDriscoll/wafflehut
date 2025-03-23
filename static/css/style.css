@@ -43,6 +43,16 @@ h1 {
     font-size: 75px !important;
 }
 
+/** Styles for under the navbar */
+
+.username-nav {
+    background-color: #f9b639;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 0 0 20px 20px;
+}
+
 /* Styles for each post */
 
 

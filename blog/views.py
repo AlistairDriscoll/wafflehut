@@ -2,7 +2,6 @@ import random
 
 from django.shortcuts import render, reverse, get_object_or_404, redirect
 from django.core.paginator import Paginator
-from django.views import generic
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -54,7 +53,6 @@ def user_page(request, username):
     page_number = request.GET.get('page')
     posts = paginator.get_page(page_number)
 
-
     user_rank = get_object_or_404(UserRank, user=user)
     user_form = UserRankForm(instance=user_rank)
 
@@ -80,14 +78,17 @@ def delete_account(request):
     if request.user.is_authenticated:
         user = request.user
         user.delete()
+
         return redirect('index')
 
 
+@login_required
 def write_post(request):
     """
     View for taking the PostForm data and storing it in the database
     - Checks to see if the user is autheinticated, then displays the PostForm
-    - Checks to see if the form is valid, and if so saves to the database with a message stating success
+    - Checks to see if the form is valid, and if so
+    saves to the database with a message stating success
     - Gets the users wafflescore and adds a point to it
     - Takes the user to their webpage where their new post should appear
     """
@@ -97,11 +98,14 @@ def write_post(request):
             post_form = PostForm(data=request.POST)
             if post_form.is_valid():
                 instance = post_form.save(commit=False)
-                instance.author = User.objects.get(username=request.user.username)
+                instance.author = User.objects.get(
+                    username=request.user.username)
                 if instance.content == "":
-                    instance.content = f"{instance.author.username} has refused to elaborate their waffle."
+                    instance.content = f"{instance.author.username}"
+                    " has refused to elaborate their waffle."
                 instance.save()
-                messages.add_message(request, messages.SUCCESS, 'Post Uploaded Succesfully!!')
+                messages.add_message(
+                    request, messages.SUCCESS, 'Post Uploaded Succesfully!!')
 
                 user_rank = get_object_or_404(UserRank, user=request.user)
                 user_rank.wafflescore += 1
@@ -109,10 +113,9 @@ def write_post(request):
 
                 return redirect('user_page', username=request.user)
         else:
-            messages.add_message(request, messages.ERROR, 'You can only delete your own posts!')
-
+            messages.add_message(
+                request, messages.ERROR, 'You can only delete your own posts!')
             return render('index')
-
 
     post_form = PostForm()
 
@@ -130,13 +133,11 @@ def view_full_post(request, slug):
 
     post = get_object_or_404(Post, slug=slug)
 
-
     def capitalize(title):
         return title[0].upper() + title[1:]
 
     post.title = capitalize(post.title)
     edit_form = EditForm(instance=post)
-
 
     return render(
         request,
@@ -148,12 +149,15 @@ def view_full_post(request, slug):
     )
 
 
-def delete_post(request, slug, post_id):
+@login_required
+def delete_post(request, slug):
     """
-    View to delete a post, the 'if' statement was taken from Code Institute and edited to suit this view
+    View to delete a post, the 'if' statement was taken from Code Institute and
+    edited to suit this view
     - Gets the post from the database
     - Checks to see if the post author is the same as the request user
-    - If so deletes the record and knocks the users wafflescore down a point before saving
+    - If so deletes the record and knocks the users wafflescore down a point
+    before saving
     - Adds a message depending on if the user was authorised to delete
     - Goes back to the user page
     """
@@ -163,13 +167,14 @@ def delete_post(request, slug, post_id):
     if post.author == request.user:
         post.delete()
         user_rank = get_object_or_404(UserRank, user=post.author)
-        user_rank.wafflescore =- 1
+        user_rank.wafflescore -= 1
         user_rank.save()
         messages.add_message(request, messages.SUCCESS, 'Post deleted!')
     else:
-        messages.add_message(request, messages.ERROR, 'You can only delete your own posts!')
+        messages.error(request, 'You can only delete your own posts!')
 
-    return HttpResponseRedirect(reverse('user_page', kwargs={'username': post.author.username}))
+    return HttpResponseRedirect(
+        reverse('user_page', kwargs={'username': post.author.username}))
 
 
 @login_required
@@ -198,6 +203,7 @@ def edit_post(request, post_id, slug):
     )
 
 
+@login_required
 def edit_user(request, username):
     """
     View to edit the users details
@@ -216,7 +222,8 @@ def edit_user(request, username):
 
         else:
             print("Form errors:", user_form.errors)
-            messages.add_message(request, messages.ERROR, 'Error updating post!')
+            messages.add_message(
+                request, messages.ERROR, 'Error updating post!')
 
     else:
         user_form = UserRankForm(instance=user)
@@ -224,7 +231,6 @@ def edit_user(request, username):
     posts = Post.objects.filter(author=user)
     user_rank = get_object_or_404(UserRank, user=user)
     post_count = posts.count()
-
 
     return render(
             request,
@@ -237,4 +243,3 @@ def edit_user(request, username):
                 "user_form": user_form
             },
         )
-
