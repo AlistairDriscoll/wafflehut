@@ -1,169 +1,169 @@
 {% extends "base.html" %}
 {% block content %}
-  {% load crispy_forms_tags %}
+    {% load crispy_forms_tags %}
 
-  <!-- Displays the username at the top with a border beneath -->
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12 border-bottom border-2">
-        {% if user.is_authenticated and user.username == username %}
-          <h1>Hello, {{ user.username }}</h1>
-        {% else %}
-          <h1>{{ username }}'s Profile</h1>
-        {% endif %}
-      </div>
+    <!-- Displays the username at the top with a border beneath -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 border-bottom border-2">
+                {% if user.is_authenticated and user.username == username %}
+                    <h1>Hello, {{ user.username }}</h1>
+                {% else %}
+                    <h1>{{ username }}'s Profile</h1>
+                {% endif %}
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- User Rank Information -->
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12 col-md-3 border-right border-md-3 brown-background">
-        <p data-user_score="{{ user_rank.wafflescore }}" id="wafflerankHeader"></p>
+    <!-- User Rank Information -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3 border-right border-md-3 brown-background">
+                <p data-user_score="{{ user_rank.wafflescore }}" id="wafflerankHeader"></p>
+                <p>
+                    Full Name: <span class="east-sea-dokdo-smaller">
+                    {% if user_rank.full_name == "" %}
+                        {{ username }} Has not put
+                        their full name
+                    {% else %}
+                        {{ user_rank.full_name }}
+                    {% endif %}
+                </span>
+            </p>
+
+            <p>
+                Bio: <span class="east-sea-dokdo-smaller">
+                {% if user_rank.bio == "" %}
+                    No user bio for this page
+                {% else %}
+                    {{ user_rank.bio }}
+                {% endif %}
+            </span>
+        </p>
+
         <p>
-          Full Name: <span class="east-sea-dokdo-smaller">
-          {% if user_rank.full_name == "" %}
-            {{ username }} Has not put
-            their full name
-          {% else %}
-            {{ user_rank.full_name }}
-          {% endif %}
-        </span>
-      </p>
+            {{ username }} started waffling on: <span class="east-sea-dokdo-smaller">{{ user_rank.dof }}</span>
+        </p>
 
-      <p>
-        Bio: <span class="east-sea-dokdo-smaller">
-        {% if user_rank.bio == "" %}
-          No user bio for this page
-        {% else %}
-          {{ user_rank.bio }}
+        {% if user.is_authenticated and user.username == username %}
+            <button type="button"
+                    class="btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#updateUserModal">Update your information</button>
+
+            <button type="button"
+                    class="btn delete-btn-hover"
+                    data-bs-toggle="modal"
+                    data-bs-target="#deleteAccountModal">Delete your account</button>
+
         {% endif %}
-      </span>
-    </p>
+    </div>
 
-    <p>
-      {{ username }} started waffling on: <span class="east-sea-dokdo-smaller">{{ user_rank.dof }}</span>
-    </p>
+    <!--If statement to display users posts if they have any, followed by an for loop if there is -->
 
-    {% if user.is_authenticated and user.username == username %}
-      <button type="button"
-              class="btn"
-              data-bs-toggle="modal"
-              data-bs-target="#updateUserModal">Update your information</button>
-
-      <button type="button"
-              class="btn delete-btn-hover"
-              data-bs-toggle="modal"
-              data-bs-target="#deleteAccountModal">Delete your account</button>
-
+    {% if post_count == 0 %}
+        <div class="col-12 col-md-9">
+            <h3>{{ username }} is Yet to Waffle.</h3>
+            <a href="{% url 'write_post' %}" class="btn btn-large">Write some waffle</a>
+        </div>
+    {% else %}
+        <div class="col-12 col-md-9">
+            <h3>{{ username }}'s Posts</h3>
+            <div class="row justify-content-around">
+                {% for post in posts %}
+                    <div class="post col-lg-5 col-12 m-2">
+                        <h2>{{ post.title }}</h2>
+                        <div class="author">Written by {{ post.author }}</div>
+                        <div class="created_on">Created on: {{ post.created_on|date:"F j, Y" }}</div>
+                        <div class="post-content">{{ post.content|truncatechars:50 }}</div>
+                        {% if post_count > 0 %}
+                            <a class="btn view-full-post"
+                               href="{% url 'view_full_post' slug=post.slug %}">See Full
+                            Post</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     {% endif %}
-  </div>
-
-  <!--If statement to display users posts if they have any, followed by an for loop if there is -->
-
-  {% if post_count == 0 %}
-    <div class="col-12 col-md-9">
-      <h3>{{ username }} is Yet to Waffle.</h3>
-      <a href="{% url 'write_post' %}" class="btn btn-large">Write some waffle</a>
-    </div>
-  {% else %}
-    <div class="col-12 col-md-9">
-      <h3>{{ username }}'s Posts</h3>
-      <div class="row justify-content-around">
-        {% for post in posts %}
-          <div class="post col-lg-5 col-12 m-2">
-            <h2>{{ post.title }}</h2>
-            <div class="author">Written by {{ post.author }}</div>
-            <div class="created_on">Created on: {{ post.created_on|date:"F j, Y" }}</div>
-            <div class="post-content">{{ post.content|truncatechars:50 }}</div>
-            {% if post_count > 0 %}
-              <a class="btn view-full-post"
-                 href="{% url 'view_full_post' slug=post.slug %}">See Full
-              Post</a>
-            {% endif %}
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  {% endif %}
 </div>
 </div>
 
 <!-- Navbar for going between each pages, made with the help of chatGPT and code institute -->
 
 {% if posts.has_other_pages %}
-  <nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
-      {% if posts.has_previous %}
-        <li class="page-item">
-          <a href="?page={{ posts.previous_page_number }}" class="page-link">« PREV</a>
-        </li>
-      {% endif %}
-      {% if posts.has_next %}
-        <li class="page-item">
-          <a href="?page={{ posts.next_page_number }}" class="page-link">NEXT »</a>
-        </li>
-      {% endif %}
-    </ul>
-  </nav>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if posts.has_previous %}
+                <li class="page-item">
+                    <a href="?page={{ posts.previous_page_number }}" class="page-link">« PREV</a>
+                </li>
+            {% endif %}
+            {% if posts.has_next %}
+                <li class="page-item">
+                    <a href="?page={{ posts.next_page_number }}" class="page-link">NEXT »</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
 {% endif %}
 
 {% if user.is_authenticated and user.username == username %}
 
-  <!--Modal to display the form for the user to update their info -->
+    <!--Modal to display the form for the user to update their info -->
 
-  <div class="modal" tabindex="-1" role="dialog" id="updateUserModal">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalTitle">Update your details here!</h5>
-          <button type="button"
-                  class="close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close">
-            <span aria-hidden="true">X</span>
-          </button>
+    <div class="modal" tabindex="-1" role="dialog" id="updateUserModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Update your details here!</h5>
+                    <button type="button"
+                            class="close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">X</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <form id="userForm"
+                          method="post"
+                          action="{% url 'edit_user' username=user.username %}">
+                        {% csrf_token %}
+                        {{ user_form | crispy }}
+                        <button type="submit" class="btn">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="modal-body" id="modalBody">
-          <form id="userForm"
-                method="post"
-                action="{% url 'edit_user' username=user.username %}">
-            {% csrf_token %}
-            {{ user_form | crispy }}
-            <button type="submit" class="btn">Submit</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Deletion Modal, taken and modified from bootstraps documentation -->
+    <!-- Deletion Modal, taken and modified from bootstraps documentation -->
 
-  <div class="modal" tabindex="-1" role="dialog" id="deleteAccountModal">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Are you sure you want to delete your account?</h5>
-          <button type="button"
-                  class="close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close">
-            <span aria-hidden="true">X</span>
-          </button>
+    <div class="modal" tabindex="-1" role="dialog" id="deleteAccountModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Are you sure you want to delete your account?</h5>
+                    <button type="button"
+                            class="close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">X</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>You, your and all your posts will be permanently wiped from the database</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="{% url 'delete_account' %}" method="post" id="confirmDelete">
+                        <button type="button" class="btn btn-warning">Delete</button>
+                    </a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>You, your and all your posts will be permanently wiped from the database</p>
-        </div>
-        <div class="modal-footer">
-          <a href="{% url 'delete_account' %}" method="post" id="confirmDelete">
-            <button type="button" class="btn btn-warning">Delete</button>
-          </a>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
-  </div>
 
 {% endif %}
 

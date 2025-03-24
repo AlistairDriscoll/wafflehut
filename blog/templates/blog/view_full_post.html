@@ -1,87 +1,90 @@
-{% extends "base.html" %} {% block content %}
-{% load crispy_forms_tags %}
+{% extends "base.html" %}
+{% block content %}
+    {% load crispy_forms_tags %}
 
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-lg-8 d-flex flex-column justify-content-between align-items-center">
-      <h1 class="east-sea-dokdo-h1">{{ post.title }}</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 d-flex flex-column justify-content-between align-items-center">
+                <h1 class="east-sea-dokdo-h1">{{ post.title }}</h1>
 
-      <div class="brown-background content-bigger">
-        {{ post.content }}
-      </div>
+                <div class="brown-background content-bigger">{{ post.content }}</div>
 
-      <div class="created_on">
-        {{ post.created_on }}
-      </div>
+                <div class="created_on">{{ post.created_on }}</div>
 
-      <div>
-        By: {{ post.author }}
-      </div>
+                <div>By: {{ post.author }}</div>
 
-      {% if user.is_authenticated and user == post.author %}
+                {% if user.is_authenticated and user == post.author %}
 
-      <div class="align-self-end mt-auto">
-        <button type="button" class="btn" id="edit-post-btn" data-post_id="{{ post.id }}" data-post_slug="{{ post.slug }}"
-          data-post-content="{{ post.content }}" data-post-title="{{ post.title }}">
-          Edit
-        </button>
+                    <div class="align-self-end mt-auto">
+                        <button type="button"
+                                class="btn"
+                                id="edit-post-btn"
+                                data-post_id="{{ post.id }}"
+                                data-post_slug="{{ post.slug }}"
+                                data-post-content="{{ post.content }}"
+                                data-post-title="{{ post.title }}">Edit</button>
 
+                        <button type="button"
+                                class="btn delete-btn-hover"
+                                id="delete-post-btn"
+                                post_id="{{ post.id }}"
+                                data-post-slug="{{ post.slug }}">Delete</button>
+                    </div>
 
-        <button type="button" class="btn delete-btn-hover" id="delete-post-btn" post_id="{{ post.id }}" data-post-slug="{{ post.slug }}">
-          Delete
-        </button>
-      </div>
-
-      {% else %}
-      <a href="{% url 'user_page' post.author %}" class="btn m-1">Go to {{ post.author }}'s Profile</a>
-      {% endif %}
+                {% else %}
+                    <a href="{% url 'user_page' post.author %}" class="btn m-1">Go to {{ post.author }}'s Profile</a>
+                {% endif %}
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-
-<!-- Deletion Modal, taken and modified from bootstraps documentation -->
-<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Are you sure you want to delete?</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Deleting will permanently wipe this from the database.</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#" id="confirmDelete" class="btn btn-warning">
-          Delete
-        </a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
+    <!-- Deletion Modal, taken and modified from bootstraps documentation -->
+    <div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Are you sure you want to delete?</h5>
+                    <button type="button"
+                            class="close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">X</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Deleting will permanently wipe this from the database.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" id="confirmDelete" class="btn btn-warning">Delete</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-
-<div class="modal" tabindex="-1" role="dialog" id="editModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalTitle"></h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="modalBody">
-        <form id="editForm" method="post" action="{% url 'edit_post' post.slug post.id %}">
-          {% csrf_token %}
-          {{ edit_form | crispy }}
-          <button type="submit" class="btn">Submit</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </form>
-      </div>
+    <div class="modal" tabindex="-1" role="dialog" id="editModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"></h5>
+                    <button type="button"
+                            class="close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">X</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <form id="editForm"
+                          method="post"
+                          action="{% url 'edit_post' post.slug post.id %}">
+                        {% csrf_token %}
+                        {{ edit_form | crispy }}
+                        <button type="submit" class="btn">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-{% endblock %}
+{% endblock content %}
