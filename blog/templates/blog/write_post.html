@@ -1,25 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-{% load crispy_forms_tags %}
+    {% load crispy_forms_tags %}
 
-{% if user.is_authenticated %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1>Write Some Waffle Here!</h1>
 
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <h1>Write Some Waffle Here!</h1>
-
-            <form id="postForm" method="post">
-                {{ post_form | crispy }}
-                {% csrf_token %}
-                <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
-            </form>
+                <form id="postForm" method="post" action="">
+                    {% csrf_token %}
+                    {{ post_form | crispy }}
+                    <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-
-{% else %}
-<h1>Log in to write a post</h1>
-{% endif %}
-
 {% endblock content %}

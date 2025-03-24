@@ -81,24 +81,23 @@ def write_post(request):
     """
 
     if request.method == "POST":
-        if request.user.is_authenticated:
-            post_form = PostForm(data=request.POST)
-            if post_form.is_valid():
-                instance = post_form.save(commit=False)
-                instance.author = User.objects.get(
-                    username=request.user.username)
-                if instance.content == "":
-                    instance.content = f"{instance.author.username}"
-                    " has refused to elaborate their waffle."
-                instance.save()
-                messages.add_message(
-                    request, messages.SUCCESS, 'Post Uploaded Succesfully!!')
+        post_form = PostForm(data=request.POST)
+        if post_form.is_valid():
+            instance = post_form.save(commit=False)
+            instance.author = User.objects.get(
+                username=request.user.username)
+            if instance.content == "":
+                instance.content = f"{instance.author.username}"
+                " has refused to elaborate their waffle."
+            instance.save()
+            messages.add_message(
+                request, messages.SUCCESS, 'Post Uploaded Succesfully!!')
 
-                user_rank = get_object_or_404(UserRank, user=request.user)
-                user_rank.wafflescore += 1
-                user_rank.save()
+            user_rank = get_object_or_404(UserRank, user=request.user)
+            user_rank.wafflescore += 1
+            user_rank.save()
 
-                return redirect('user_page', username=request.user)
+            return redirect('user_page', username=request.user)
         else:
             messages.add_message(
                 request, messages.ERROR, 'You can only delete your own posts!')

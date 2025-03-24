@@ -1,11 +1,5 @@
 /* jshint esversion: 6 */
 
-const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
-const deletePostButton = document.getElementById("delete-post-btn");
-const confirmDelete = document.getElementById("confirmDelete");
-const editButton = document.getElementById("edit-post-btn");
-const editModal = new bootstrap.Modal(document.getElementById("editModal"));
-
 
 /**
 * Initializes deletion functionality for the provided delete buttons.
@@ -20,27 +14,12 @@ const editModal = new bootstrap.Modal(document.getElementById("editModal"));
 */
 
 
-deletePostButton.addEventListener('click', (e) => {
-    let postId = e.target.getAttribute("post_id");
-    confirmDelete.href = `delete_post/${postId}`;
-    deleteModal.show();
-});
-
-
 /**
  * Edit post functionality
  * Adds event listener to the edit button on the 'view_full_post.html' page
  * Changes the title of the modal to the title of the post
  * Then shows the editModal
  */
-
-
-editButton.addEventListener('click', (e) => {
-    let title = document.getElementById("modalTitle");
-    let titleContent = e.target.getAttribute("data-post-title");
-    title.innerText = titleContent;
-    editModal.show();
-});
 
 
 /**

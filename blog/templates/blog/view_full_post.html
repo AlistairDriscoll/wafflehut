@@ -18,17 +18,14 @@
                     <div class="align-self-end mt-auto">
                         <button type="button"
                                 class="btn"
-                                id="edit-post-btn"
-                                data-post_id="{{ post.id }}"
-                                data-post_slug="{{ post.slug }}"
-                                data-post-content="{{ post.content }}"
-                                data-post-title="{{ post.title }}">Edit</button>
+                                data-bs-toggle="modal"
+                                data-bs-target="#editModal">Edit</button>
 
                         <button type="button"
                                 class="btn delete-btn-hover"
-                                id="delete-post-btn"
-                                post_id="{{ post.id }}"
-                                data-post-slug="{{ post.slug }}">Delete</button>
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteModal">Delete</button>
+
                     </div>
 
                 {% else %}
@@ -55,7 +52,7 @@
                     <p>Deleting will permanently wipe this from the database.</p>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" id="confirmDelete" class="btn btn-warning">Delete</a>
+                    <a href="{% url 'delete_post' slug=post.slug %}" class="btn btn-warning">Delete</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
