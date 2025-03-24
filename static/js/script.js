@@ -1,4 +1,6 @@
 /* jshint esversion: 6 */
+/* global bootstrap */
+
 
 let wafflerankHeader = document.getElementById('wafflerank-header');
 let userScore = wafflerankHeader.getAttribute('data-user_score');
