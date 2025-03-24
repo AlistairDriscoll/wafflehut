@@ -11,32 +11,19 @@ from .models import Post, UserRank
 from .forms import PostForm, UserRankForm, EditForm
 
 
-def Index(request):
-    posts = Post.objects.all()
+def index(request):
+    """
+    Homepage view — shows 4 random posts.
+    """
 
-    def get_posts(posts):
-        """
-        Function to return four random posts to be displayed on the home page
-        """
-
-        post_list = []
-        for p in posts:
-            post_list.append(p)
-
-        if len(post_list) >= 4:
-            display_posts = random.sample(post_list, 4)
-        else:
-            display_posts = post_list
-
-        return display_posts
-
-    username = request.user
-    queryset = get_posts(posts)
+    posts = list(Post.objects.all())
+    if len(posts) >= 4:
+        posts = random.sample(posts, 4)
 
     return render(
         request,
         "blog/posts.html",
-        {"username": username, "posts": queryset},
+        {"username": request.user, "posts": posts},
     )
 
 
@@ -78,7 +65,7 @@ def delete_account(request):
     if request.user.is_authenticated:
         user = request.user
         user.delete()
-
+        messages.success(request, 'Account succesfully deleted.')
         return redirect('index')
 
 
