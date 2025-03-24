@@ -2,14 +2,14 @@ from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 
-# Create your models here.
 
 class Post(models.Model):
     """
     Stores a single blog post entry related to :model:`auth.User`
-    The model detail here partly taken from the 'I think therfore I blog' code institute module
+    The model detail here partly taken from the 'I think therfore I blog'
+    code institute module
     """
-    
+
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
     author = models.ForeignKey(
