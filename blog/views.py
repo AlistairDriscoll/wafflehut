@@ -206,40 +206,41 @@ def edit_post(request, post_id, slug):
 @login_required
 def edit_user(request, username):
     """
-    View to edit the users details
+    View to edit the user's profile details.
+    Only allows the user to edit their own info.
     """
 
     user = get_object_or_404(User, username=username)
+    if user != request.user:
+        messages.error(
+            request, "You are not allowed to edit this user's information.")
+        return redirect("index")
+
     user_rank = get_object_or_404(UserRank, user=user)
 
     if request.method == "POST":
         user_form = UserRankForm(request.POST, instance=user_rank)
-        if user_form.is_valid:
-            user_rank = user_form.save()
-            messages.add_message(request, messages.SUCCESS, 'Details Updated!')
-
-            return redirect('user_page', username=username)
-
+        if user_form.is_valid():
+            user_form.save()
+            messages.success(request, "Details updated!")
+            return redirect("user_page", username=username)
         else:
-            print("Form errors:", user_form.errors)
-            messages.add_message(
-                request, messages.ERROR, 'Error updating post!')
-
+            messages.error(
+                request, "There was an error updating your details.")
     else:
-        user_form = UserRankForm(instance=user)
+        user_form = UserRankForm(instance=user_rank)
 
     posts = Post.objects.filter(author=user)
-    user_rank = get_object_or_404(UserRank, user=user)
     post_count = posts.count()
 
     return render(
-            request,
-            "blog/user_page.html",
-            {
-                "username": username,
-                "posts": posts,
-                "user_rank": user_rank,
-                "post_count": post_count,
-                "user_form": user_form
-            },
-        )
+        request,
+        "blog/user_page.html",
+        {
+            "username": username,
+            "posts": posts,
+            "user_rank": user_rank,
+            "post_count": post_count,
+            "user_form": user_form,
+        },
+    )
