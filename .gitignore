@@ -10,3 +10,6 @@ cloudinary_python.txt
 db.sqlite3
 .venv
 pycache/
+/staticfiles/
+/staticfiles/**
+staticfiles/

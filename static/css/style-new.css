@@ -53,6 +53,15 @@ h1 {
     border-radius: 0 0 20px 20px;
 }
 
+/** Username alert styling */
+
+.username-alert {
+    border: 2px solid black !important;
+    border-radius: 20px;
+    background-color: #f9b639;
+    padding: 5px;
+}
+
 /* Styles for each post */
 
 .post {

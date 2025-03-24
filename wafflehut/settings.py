@@ -28,7 +28,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'wafflehut.settings')
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEVELOPMENT") == "True"
 
 ALLOWED_HOSTS = ['8000-alistairdrisc-wafflehut-j'
                  'h11xkdolln.ws.codeinstitute-ide.net',
