@@ -115,25 +115,18 @@ def write_post(request):
 
 def view_full_post(request, slug):
     """
-    View to display a full blog post
+    View to display a full blog post and edit form if the user is the author
     """
-
     post = get_object_or_404(Post, slug=slug)
 
-    def capitalize(title):
-        return title[0].upper() + title[1:]
+    context = {
+        "post": post,
+    }
 
-    post.title = capitalize(post.title)
-    edit_form = EditForm(instance=post)
+    if request.user.is_authenticated and request.user == post.author:
+        context["edit_form"] = EditForm(instance=post)
 
-    return render(
-        request,
-        "blog/view_full_post.html",
-        {
-            "post": post,
-            "edit_form": edit_form,
-        },
-    )
+    return render(request, "blog/view_full_post.html", context)
 
 
 @login_required
