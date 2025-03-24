@@ -55,7 +55,6 @@ h1 {
 
 /* Styles for each post */
 
-
 .post {
     background-color: #f9b639;
     border-style: solid;
@@ -125,9 +124,15 @@ h1,
 
 /** Full post content */
 
-.content-bigger {
+.full-post {
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 20px;
+    padding: 15px;
     font-size: 1.3rem;
-    font-weight: 170;
+    font-weight: 500;
+    background-color: #f9b639;
 }
 
 /** message styling */
