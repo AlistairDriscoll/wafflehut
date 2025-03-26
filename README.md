@@ -45,7 +45,7 @@ To find out about deployment, refer to the [DEPLOYMENT.md](DEPLOYMENT.md) file.
 
 ## Future Improvements
 
-Too see any future improvements, click [here.](FutureImprovements.md)
+Too see any future improvements, click [here.](FUTUREIMPROVEMENTS.md)
 
 ## Mistakes
 
@@ -53,57 +53,21 @@ In terms of mistakes, I kept on accidentally keeping the debug set to true when 
 
 ## Technologies Used
 
+- HTML
+- CSS
+- Javascript
+- Python: Version 3.2
+- Bootstrap: Version 5
 - Django: Version 4.2.5
 - Django Crispy Forms
 - Django Allauth
 - Django Summernote
-- Bootstrap
 - Whitenoise
-- CSS
-- Javascript
-- HTML
-- Python: Version 3.2
 - Heroku
 - GitHub
 - FontAwesome: special appreciation for the website that provided over 6000 different waffle icons to choose from!
 - Jquery in order to work javascript
 
-## Compatibility
+## Testing
 
-Here is the website displaying in Edge, Chrome and firefox.
-
-![Edge screenshot](documentation/finished-content/edge-screenshot.jpg)
-![Chrome screenshot](documentation/finished-content/chrome-screenshot.jpg)
-![Firefox screenshot](documentation/finished-content/firefox-screenshot.jpg)
-
-## Lighthouse
-
-For the home page:
-![Index lighthouse screenshot](documentation/finished-content/lighthouse.jpg)
-
-For the userpage:
-![Userpage lighthouse](documentation/finished-content/lighthouse-userpage.jpg)
-
-For a view_full_post page:
-![Post page lighthouse](documentation/finished-content/lighthouse-userpage.jpg)
-
-Sign in page:
-![Sign in lighthouse](documentation/finished-content/sign-in-lighthouse.jpg)
-
-Sign out page:
-![Sign-out lighthouse](documentation/finished-content/sign-out-lighthouse.jpg)
-
-Sign-up page
-![Sign-up lighthouse](documentation/finished-content/sign-up-lighthouse.jpg)
-
-
-## Validation
-
-Validation can be seen here in the ![VALIDATION.md file.](VALIDATION.md)
-
-## Responsivity
-
-![Big screen responsivity](documentation/finished-content/resp-full-screen.jpg)
-![Medium screen responsivity](documentation/finished-content/resp-midsize.jpg)
-![Small screen responsivity](documentation/finished-content/resp-smllscrn.jpg)
-
+Testing can be seen in the [TESTING.md file.](TESTING.md)

@@ -38,3 +38,42 @@
 | 1           | User creates an account | UserRank instance made with wafflescore set to zero | Y |             |
 | 2           | User uploads post | Wafflescore goes up a point | Y |             |
 | 3           | User deletes post | Wafflescore goes down a point | Y |             |
+
+## Compatibility
+
+Here is the website displaying in Edge, Chrome and firefox.
+
+![Edge screenshot](documentation/finished-content/edge-screenshot.jpg)
+![Chrome screenshot](documentation/finished-content/chrome-screenshot.jpg)
+![Firefox screenshot](documentation/finished-content/firefox-screenshot.jpg)
+
+## Lighthouse
+
+For the home page:
+![Index lighthouse screenshot](documentation/finished-content/lighthouse.jpg)
+
+For the userpage:
+![Userpage lighthouse](documentation/finished-content/lighthouse-userpage.jpg)
+
+For a view_full_post page:
+![Post page lighthouse](documentation/finished-content/lighthouse-userpage.jpg)
+
+Sign in page:
+![Sign in lighthouse](documentation/finished-content/sign-in-lighthouse.jpg)
+
+Sign out page:
+![Sign-out lighthouse](documentation/finished-content/sign-out-lighthouse.jpg)
+
+Sign-up page
+![Sign-up lighthouse](documentation/finished-content/sign-up-lighthouse.jpg)
+
+
+## Validation
+
+Validation can be seen here in the ![VALIDATION.md file.](VALIDATION.md)
+
+## Responsivity
+
+![Big screen responsivity](documentation/finished-content/resp-full-screen.jpg)
+![Medium screen responsivity](documentation/finished-content/resp-midsize.jpg)
+![Small screen responsivity](documentation/finished-content/resp-smllscrn.jpg)
