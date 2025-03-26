@@ -68,8 +68,11 @@ In terms of mistakes, I kept on accidentally keeping the debug set to true when 
 - Heroku
 - GitHub
 - FontAwesome: special appreciation for the website that provided over 6000 different waffle icons to choose from!
-- Jquery in order to work javascript
 
 ## Testing
 
 Testing can be seen in the [TESTING.md file.](TESTING.md)
+
+## Credits
+
+In the making of this project I have had to use and have help from different sources such as the Code Institute 'Codestar' blog walkthrough. I have put comments in various parts of the code in places that have borrowed/adapted code.
