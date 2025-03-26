@@ -5,6 +5,8 @@ This app was developed by [Alistair Driscoll](https://github.com/AlistairDriscol
 
 The full repository can be found [here](https://github.com/AlistairDriscoll/wafflehut)
 
+A link to the deployed website is [here.](https://wafflehut-b72a2da43389.herokuapp.com/)
+
 ![Wafflehut logo](documentation/basic-structure/logo-mini.jpg)
 
 ## About
