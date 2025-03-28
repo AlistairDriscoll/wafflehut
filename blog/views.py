@@ -1,10 +1,9 @@
 import random
 
-from django.shortcuts import render, reverse, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
 from .models import Post, UserRank
@@ -122,29 +121,26 @@ def view_full_post(request, slug):
 @login_required
 def delete_post(request, slug):
     """
-    View to delete a post, the 'if' statement was taken from Code Institute and
-    edited to suit this view
-    - Gets the post from the database
-    - Checks to see if the post author is the same as the request user
-    - If so deletes the record and knocks the users wafflescore down a point
-    before saving
-    - Adds a message depending on if the user was authorised to delete
-    - Goes back to the user page
+    View to delete a post.
+    Only the author can delete their post.
+    Updates user's wafflescore and shows a success or error message.
     """
+    if request.method != "POST":
+        messages.warning(request, "Invalid request method.")
+        return redirect("index")
 
     post = get_object_or_404(Post, slug=slug)
 
     if post.author == request.user:
         post.delete()
         user_rank = get_object_or_404(UserRank, user=post.author)
-        user_rank.wafflescore -= 1
+        user_rank.wafflescore = max(0, user_rank.wafflescore - 1)
         user_rank.save()
-        messages.add_message(request, messages.SUCCESS, 'Post deleted!')
+        messages.success(request, "Post deleted!")
     else:
-        messages.error(request, 'You can only delete your own posts!')
+        messages.error(request, "You can only delete your own posts!")
 
-    return HttpResponseRedirect(
-        reverse('user_page', kwargs={'username': post.author.username}))
+    return redirect("user_page", username=post.author.username)
 
 
 @login_required
