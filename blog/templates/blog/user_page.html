@@ -19,7 +19,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-3 border-right border-md-3 brown-background">
-                <h3 class="east-sea-dokdo" data-user_score="{{ user_rank.wafflescore }}" id="wafflerank-header"></h3>
+                <h3 class="east-sea-dokdo"
+                    data-user_score="{{ user_rank.wafflescore }}"
+                    id="wafflerank-header"></h3>
                 <p>
                     Full Name: <span class="east-sea-dokdo-smaller">
                     {% if user_rank.full_name == "" %}
@@ -69,18 +71,18 @@
     {% else %}
         <div class="col-12 col-md-9">
             <h3>{{ username }}'s Posts</h3>
-            <div class="row justify-content-around">
+            <div class="row justify-content-around align-items-stretch">
                 {% for post in posts %}
-                    <div class="post col-lg-5 col-12 m-2">
+                    <div class="post col-lg-5 col-12 mb-4 d-flex flex-column">
+                        <div class="author align-self-start mb-1">Written by {{ post.author }}</div>
                         <h2>{{ post.title }}</h2>
-                        <div class="author">Written by {{ post.author }}</div>
+                        <div class="post-content my-auto">{{ post.content|truncatechars:50 }}</div>
+                        <footer class="mt-auto pt-2 d-flex justify-content-center gap-2">
+                            <a class="btn full-post-button"
+                               href="{% url 'view_full_post' post.slug %}">See Full Post</a>
+                            <a class="btn full-post-button" href="{% url 'user_page' post.author %}">Go to {{ post.author }}'s Profile</a>
+                        </footer>
                         <div class="created_on">Created on: {{ post.created_on|date:"F j, Y" }}</div>
-                        <div class="post-content">{{ post.content|truncatechars:50 }}</div>
-                        {% if post_count > 0 %}
-                            <a class="btn view-full-post"
-                               href="{% url 'view_full_post' slug=post.slug %}">See Full
-                            Post</a>
-                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
