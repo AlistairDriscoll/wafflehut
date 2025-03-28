@@ -7,6 +7,8 @@ The full repository can be found [here](https://github.com/AlistairDriscoll/waff
 
 A link to the deployed website is [here.](https://wafflehut-b72a2da43389.herokuapp.com/)
 
+The kanban board to show my progress is [here.](https://github.com/users/AlistairDriscoll/projects/5)
+
 ![Wafflehut logo](documentation/basic-structure/logo-mini.jpg)
 
 ## About
