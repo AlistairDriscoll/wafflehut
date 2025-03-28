@@ -59,51 +59,42 @@ def user_page(request, username):
 @login_required
 def delete_account(request):
     """
-    View to delete user
+    Secure view to delete the logged-in user's account.
     """
-
-    if request.user.is_authenticated:
-        user = request.user
-        user.delete()
-        messages.success(request, 'Account succesfully deleted.')
-        return redirect('index')
+    request.user.delete()
+    messages.success(request, "Account successfully deleted.")
+    return redirect("index")
 
 
 @login_required
 def write_post(request):
     """
-    View for taking the PostForm data and storing it in the database
-    - Checks to see if the user is autheinticated, then displays the PostForm
-    - Checks to see if the form is valid, and if so
-    saves to the database with a message stating success
-    - Gets the users wafflescore and adds a point to it
-    - Takes the user to their webpage where their new post should appear
+    View to create a post.
+    Adds a waffle point and redirects to the user's page if successful.
     """
-
     if request.method == "POST":
         post_form = PostForm(data=request.POST)
         if post_form.is_valid():
             instance = post_form.save(commit=False)
-            instance.author = User.objects.get(
-                username=request.user.username)
-            if instance.content == "":
-                instance.content = f"{instance.author.username}"
-                " has refused to elaborate their waffle."
+            instance.author = request.user
+            if instance.content.strip() == "":
+                instance.content = (
+                    f"{request.user.username} has refused to"
+                    " elaborate their waffle."
+                )
             instance.save()
-            messages.add_message(
-                request, messages.SUCCESS, 'Post Uploaded Succesfully!!')
 
             user_rank = get_object_or_404(UserRank, user=request.user)
             user_rank.wafflescore += 1
             user_rank.save()
 
-            return redirect('user_page', username=request.user)
+            messages.success(request, "Post uploaded successfully!")
+            return redirect("user_page", username=request.user.username)
         else:
-            messages.add_message(
-                request, messages.ERROR, 'You can only delete your own posts!')
-            return render('index')
+            messages.error(request, "There was an error with your post.")
 
-    post_form = PostForm()
+    else:
+        post_form = PostForm()
 
     return render(
         request,
