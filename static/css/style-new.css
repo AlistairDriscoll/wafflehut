@@ -152,3 +152,9 @@ h1,
 .alert {
     transition: opacity 0.5s ease;
 }
+
+/* For the delete post button in view_full_post template */
+
+.delete-post {
+    display: inline;
+}

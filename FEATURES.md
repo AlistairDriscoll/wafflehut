@@ -103,4 +103,4 @@ The users details can be shown at the side with options to change them or delete
 
 An example of a modal
 
-[modal](documentation/finished-content/modal.jpg)
+![modal](documentation/finished-content/modal.jpg)

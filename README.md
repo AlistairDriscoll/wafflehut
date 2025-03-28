@@ -35,7 +35,7 @@ Wafflehut is a Reddit-style website that is all about people sharing their opini
 ## The Database
 
 The database is based on the Django provided User model, the UserRank model and the Post model.
-The UserRank model is created via the signals.py code whenever a user is made, originally designed to just be a score tally I thought to also add functionality for the user to be able to say more about themself. The Post model has a many to one relationship with the User as the user will be able to post many different posts but each of them only addigned to the one user.
+The UserRank model is created via the signals.py code whenever a user is made, originally designed to just be a score tally I thought to also add functionality for the user to be able to say more about themself. The Post model has a many to one relationship with the User as the user will be able to post many different posts but each of them only assigned to the one user.
 
 ![ER Diagram](documentation/basic-structure/edr-mini.jpg)
 
@@ -49,11 +49,11 @@ To find out about deployment, refer to the [DEPLOYMENT.md](DEPLOYMENT.md) file.
 
 ## Future Improvements
 
-Too see any future improvements, click [here.](FUTUREIMPROVEMENTS.md)
+To see any future improvements, click [here.](FUTUREIMPROVEMENTS.md)
 
 ## Mistakes
 
-In terms of mistakes, I kept on accidentally keeping the debug set to true when I committed the code to github. Another would be the fact that I wrote some of the IDs of elements in camel case instead of kebab case as is standard convention. I did this as I got used to seeing bootstrap name their IDs with camel case so presumed to do the same. Also there are some things wrong with the forms that django has provided such as in the sign up where there are unclosed elements but as these were provided by django I thought to keep them as I'm not sure how to change then anyway.
+In terms of mistakes, I kept on accidentally keeping the debug set to true when I committed the code to github. I have since added code to check if there is a 'DEVELOPMENT' variable within the environment so that I can keep the debug set to True when I need without it affecting the deployed version. Another would be the fact that I wrote some of the IDs of elements in camel case instead of kebab case as is standard convention. I did this as I got used to seeing bootstrap name their IDs with camel case so presumed to do the same. Also there are some things wrong with the forms that django has provided such as in the sign-up form where there are unclosed elements — these were provided by Django, so I decided to leave them as-is, since changing them wasn’t clear.
 
 ## Technologies Used
 

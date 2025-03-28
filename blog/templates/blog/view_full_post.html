@@ -21,10 +21,11 @@
                                 data-bs-toggle="modal"
                                 data-bs-target="#editModal">Edit</button>
 
-                        <button type="button"
-                                class="btn delete-btn-hover"
-                                data-bs-toggle="modal"
-                                data-bs-target="#deleteModal">Delete</button>
+                        <form class="delete-post" action="{% url 'delete_post' slug=post.slug %}"
+                              method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
 
                     </div>
 

@@ -56,7 +56,7 @@ For the userpage:
 ![Userpage lighthouse](documentation/finished-content/lighthouse-userpage.jpg)
 
 For a view_full_post page:
-![Post page lighthouse](documentation/finished-content/lighthouse-userpage.jpg)
+![Post page lighthouse](documentation/finished-content/full-post-lighthouse.jpg)
 
 Sign in page:
 ![Sign in lighthouse](documentation/finished-content/sign-in-lighthouse.jpg)
